@@ -33,17 +33,17 @@ describe('actions', () => {
 })
 
 describe('reducers', () => {
+  const emptyCart = []
+  const nonEmptyCart = [
+    {id: 1, amt: 1},
+    {id: 20, amt: 100}
+  ]
+
   it('should return initial state', () => {
     expect(reducer(undefined, {}), [])
   })
 
   describe('ADD_TO_CART', () => {
-    const emptyCart = []
-    const nonEmptyCart = [
-      {id: 1, amt: 1},
-      {id: 20, amt: 100}
-    ]
-
     it('should add to empty cart', () => {
       expect(reducer(emptyCart, addToCart(1, 1))).to.deep.equal([
         {id: 1, amt: 1}
@@ -72,6 +72,42 @@ describe('reducers', () => {
       expect(actualCart).to.deep.equal(expectedCart)
       expectedCart = [nonEmptyCart[0], {id: 20, amt: 120}]
       actualCart = reducer(nonEmptyCart, addToCart(20, 20))
+    })
+  })
+
+  describe('REMOVE_FROM_CART', () => {
+    it('should remove an item by id if it is in the cart', () => {
+      let expectedCart = [nonEmptyCart[1]]
+      let actualCart = reducer(nonEmptyCart, rmFromCart(1))
+      expect(actualCart).to.deep.equal(expectedCart)
+      expectedCart = []
+      actualCart = reducer(actualCart, rmFromCart(20))
+      expect(actualCart).to.deep.equal(expectedCart)
+    })
+
+    it('should not remove an item if it is not in the cart', () => {
+      let expectedCart = [nonEmptyCart[0]]
+      let actualCart = reducer([nonEmptyCart[0]], rmFromCart(20))
+      expect(actualCart).to.deep.equal(expectedCart)
+      expectedCart = []
+      actualCart = reducer([], rmFromCart(1))
+      expect(actualCart).to.deep.equal(expectedCart)
+    })
+  })
+
+  describe.only('UPDATE_ITEM', () => {
+    it('should update an item in the cart', () => {
+      let expectedCart = [nonEmptyCart[0], {id: 20, amt: 30}]
+      let actualCart = reducer(nonEmptyCart, updateItem(20, 30))
+      expect(actualCart).to.deep.equal(expectedCart)
+      expectedCart = [{id: 1, amt: 20}, expectedCart[1]]
+      actualCart = reducer(actualCart, updateItem(1, 20))
+    })
+
+    it('should not update an item not in the cart', () => {
+      let expectedCart = nonEmptyCart
+      let actualCart = reducer(nonEmptyCart, updateItem(99, 0))
+      expect(actualCart).to.deep.equal(expectedCart)
     })
   })
 })
