@@ -30,11 +30,11 @@ const Product = db.define('product', {
     }
   },
   category: {
-    type: Sequelize.STRING,
-    allowNull: false,
+    type: Sequelize.ARRAY(Sequelize.STRING),
     validate: {
-      notEmpty: true
-    }
+      isIn: [['print']]
+    },
+    allowNull: false
   },
   filter: {
     type: Sequelize.ARRAY(Sequelize.STRING),

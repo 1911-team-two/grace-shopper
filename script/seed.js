@@ -1,18 +1,70 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Product} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const users = [
+    {
+      email: 'beyonce@gmail.com',
+      password: 'password',
+      firstName: 'Beyonce',
+      lastName: 'Knowles',
+      streetBilling: '14 Trinity Pass',
+      cityBilling: 'Pound Ridge',
+      stateBilling: 'NY',
+      zipBilling: 10576,
+      streetShipping: '505 W 37th Street',
+      cityShipping: 'New York',
+      stateShipping: 'NY',
+      zipShipping: 10019
+    },
+    {
+      email: 'dannydevito@gmail.com',
+      password: 'iloveham',
+      firstName: 'Danny',
+      lastName: 'Devito',
+      streetBilling: '1 Hawk Drive',
+      cityBilling: 'New Paltz',
+      stateBilling: 'NY',
+      zipBilling: 12561,
+      streetShipping: '333 Schermerhorn St',
+      cityShipping: 'New York',
+      stateShipping: 'NY',
+      zipShipping: 11217
+    }
+  ]
 
-  console.log(`seeded ${users.length} users`)
+  const products = [
+    {
+      imageUrl:
+        'https://ctl.s6img.com/society6/img/-Df-I9ypq_VVCaZngqRxZiJthgQ/w_700/prints/~artwork/s6-original-art-uploads/society6/uploads/misc/133a3e56f0e34a80b6c2130f394c9f72/~~/bold-and-brash1563343-prints.jpg?wait=0&attempt=0',
+      name: 'The Squidward',
+      price: 18.99,
+      description:
+        'Natural white, matte, ultra smooth background. 100% cotton, acid and lignin-free archival paper. Custom trimmed with border for framing; 1" for x-small and small, 2" for all larger sizes. Every order is custom made just for you',
+      category: ['print'],
+      filter: ['funny']
+    }
+  ]
+
+  await Promise.all(
+    users.map(user => {
+      return User.create(user)
+    })
+  )
+  console.log(`seeded ${users.length} users`, Product)
+
+  await Promise.all(
+    products.map(product => {
+      return Product.create(product)
+    })
+  )
+
+  console.log(`sedded ${products.length} products`)
   console.log(`seeded successfully`)
 }
 
