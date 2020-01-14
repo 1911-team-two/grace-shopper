@@ -1,38 +1,79 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product} = require('../server/db/models')
+const {User, Product, Address} = require('../server/db/models')
+
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const users = [
+    {
+      email: 'beyonce@gmail.com',
+      password: 'password',
+      firstName: 'Beyonce',
+      lastName: 'Knowles'
+    },
+    {
+      email: 'dannydevito@gmail.com',
+      password: 'iloveham',
+      firstName: 'Danny',
+      lastName: 'Devito'
+    }
+  ]
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
+  const addresses = [
+    {
+      street: '14 Trinity Pass',
+      city: 'Pound Ridge',
+      state: 'NY',
+      zip: 10576,
+      userId: 1
+    },
+    {
+      street: '505 W 37th street',
+      city: 'New York',
+      state: 'NY',
+      zip: 10019,
+      userId: 2
+    }
+  ]
 
-  const products = await Promise.all([
-    Product.create({
-      name: 'Tote',
-      price: 23.5,
-      description: 'The art on this bag is by Picasiooo',
-      category: 'bags',
-      filter: ['art']
-    }),
+  const products = [
+    {
+      imageUrl:
+        'https://ctl.s6img.com/society6/img/-Df-I9ypq_VVCaZngqRxZiJthgQ/w_700/prints/~artwork/s6-original-art-uploads/society6/uploads/misc/133a3e56f0e34a80b6c2130f394c9f72/~~/bold-and-brash1563343-prints.jpg?wait=0&attempt=0',
+      name: 'The Squidward',
+      price: 18.99,
+      description:
+        'Natural white, matte, ultra smooth background. 100% cotton, acid and lignin-free archival paper. Custom trimmed with border for framing; 1" for x-small and small, 2" for all larger sizes. Every order is custom made just for you',
+      category: ['print'],
+      filter: ['funny']
+    }
+  ]
 
-    Product.create({
-      name: 'Cat',
-      price: 100.0,
-      description: 'The art is by Leonardo Da Bin',
-      category: 'bags',
-      filter: ['art']
+  await Promise.all(
+    users.map(user => {
+      return User.create(user)
     })
-  ])
+  )
+  console.log(`seeded ${users.length} users`)
+
+  await Promise.all(
+    addresses.map(address => {
+      return Address.create(address)
+    })
+  )
+  console.log(`seeded ${addresses.length} addresses`)
+
+  await Promise.all(
+    products.map(product => {
+      return Product.create(product)
+    })
+  )
   console.log(`seeded ${products.length} products`)
+
   console.log(`seeded successfully`)
 }
 
