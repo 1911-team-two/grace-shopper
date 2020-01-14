@@ -1,26 +1,40 @@
 import React from 'react'
-import enzyme, {shallow} from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-enzyme.configure({
-  adapter: new Adapter()
-})
+import {connect} from 'react-redux'
+import axios from 'axios'
+
+import {getProducts} from '../store/products'
 
 import Thumbnail from './Thumbnail'
 
 // NOTE: all css is temporary, will replace with better CSS after design is finalized
 
-const Home = () => {
-  return (
-    <div>
-      <h2>All products</h2>
+class Home extends React.Component {
+  componentDidMount() {
+    this.props.getProducts()
+    console.log(this.props)
+  }
 
-      <div style={{display: 'flex'}}>
-        <Thumbnail />
-        <Thumbnail />
-        <Thumbnail />
+  render() {
+    return (
+      <div>
+        <h2>All products</h2>
+
+        <div style={{display: 'flex'}}>
+          <Thumbnail />
+          <Thumbnail />
+          <Thumbnail />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
-export default Home
+const mapStateToProps = state => ({
+  allProducts: state
+})
+
+const mapDispatchToProps = dispatch => ({
+  getProducts: () => dispatch(getProducts())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
