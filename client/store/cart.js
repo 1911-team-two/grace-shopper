@@ -4,9 +4,9 @@ const defaultCart = []
 
 /** ACTION TYPES **/
 
-const ADD_TO_CART = 'ADD_TO_CART'
-const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
-const UPDATE_ITEM = 'UPDATE_ITEM'
+export const ADD_TO_CART = 'ADD_TO_CART'
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
+export const UPDATE_ITEM = 'UPDATE_ITEM'
 
 /** ACTION CREATORS **/
 
@@ -14,7 +14,7 @@ export const addToCart = (id, amt = 1) => ({type: ADD_TO_CART, id, amt})
 
 export const rmFromCart = id => ({type: REMOVE_FROM_CART, id})
 
-export const updateItem = (id, amt) => ({type: UPDATE_ITEM, amt})
+export const updateItem = (id, amt) => ({type: UPDATE_ITEM, id, amt})
 
 /** REDUCER  **/
 
@@ -28,7 +28,7 @@ export default function(state = defaultCart, action) {
       if (itemIndex > -1) {
         newCart[itemIndex].amt += action.amt
       } else {
-        newCart.push({id: action.id, amt: 1})
+        newCart.push({id: action.id, amt: action.amt})
       }
       return newCart
     }
