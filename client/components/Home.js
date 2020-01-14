@@ -8,21 +8,21 @@ import Thumbnail from './Thumbnail'
 
 // NOTE: all css is temporary, will replace with better CSS after design is finalized
 
-class Home extends React.Component {
+export class Home extends React.Component {
   componentDidMount() {
-    this.props.getProducts()
-    console.log(this.props)
+    // this.props.getProducts()
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <h2>All products</h2>
 
         <div style={{display: 'flex'}}>
-          <Thumbnail />
-          <Thumbnail />
-          <Thumbnail />
+          {/* {this.props.allProducts.map(product => {
+            return <Thumbnail product={product} key={product.id} />
+          })} */}
         </div>
       </div>
     )
@@ -30,7 +30,7 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  allProducts: state
+  allProducts: state.products
 })
 
 const mapDispatchToProps = dispatch => ({
