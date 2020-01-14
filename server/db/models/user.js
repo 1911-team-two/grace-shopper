@@ -109,7 +109,7 @@ const User = db.define('user', {
     }
   },
   zipBilling: {
-    type: Sequelize.NUMBER,
+    type: Sequelize.INTEGER,
     allowNull: true
   },
   streetShipping: {
@@ -125,7 +125,7 @@ const User = db.define('user', {
     allowNull: true
   },
   zipShipping: {
-    type: Sequelize.NUMBER,
+    type: Sequelize.INTEGER,
     allowNull: true
   }
 })
