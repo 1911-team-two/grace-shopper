@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product} = require('../server/db/models')
+const {User, Product, Address} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -12,29 +12,30 @@ async function seed() {
       email: 'beyonce@gmail.com',
       password: 'password',
       firstName: 'Beyonce',
-      lastName: 'Knowles',
-      streetBilling: '14 Trinity Pass',
-      cityBilling: 'Pound Ridge',
-      stateBilling: 'NY',
-      zipBilling: 10576,
-      streetShipping: '505 W 37th Street',
-      cityShipping: 'New York',
-      stateShipping: 'NY',
-      zipShipping: 10019
+      lastName: 'Knowles'
     },
     {
       email: 'dannydevito@gmail.com',
       password: 'iloveham',
       firstName: 'Danny',
-      lastName: 'Devito',
-      streetBilling: '1 Hawk Drive',
-      cityBilling: 'New Paltz',
-      stateBilling: 'NY',
-      zipBilling: 12561,
-      streetShipping: '333 Schermerhorn St',
-      cityShipping: 'New York',
-      stateShipping: 'NY',
-      zipShipping: 11217
+      lastName: 'Devito'
+    }
+  ]
+
+  const addresses = [
+    {
+      street: '14 Trinity Pass',
+      city: 'Pound Ridge',
+      state: 'NY',
+      zip: 10576,
+      userId: 1
+    },
+    {
+      street: '505 W 37th street',
+      city: 'New York',
+      state: 'NY',
+      zip: 10019,
+      userId: 2
     }
   ]
 
@@ -56,15 +57,22 @@ async function seed() {
       return User.create(user)
     })
   )
-  console.log(`seeded ${users.length} users`, Product)
+  console.log(`seeded ${users.length} users`)
+
+  await Promise.all(
+    addresses.map(address => {
+      return Address.create(address)
+    })
+  )
+  console.log(`seeded ${addresses.length} addresses`)
 
   await Promise.all(
     products.map(product => {
       return Product.create(product)
     })
   )
+  console.log(`seeded ${products.length} products`)
 
-  console.log(`sedded ${products.length} products`)
   console.log(`seeded successfully`)
 }
 
