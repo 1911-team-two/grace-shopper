@@ -3,6 +3,7 @@
 const db = require('../server/db')
 const {User, Product, Address} = require('../server/db/models')
 
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
