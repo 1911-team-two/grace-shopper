@@ -5,6 +5,7 @@
   "engines": {
     "node": ">= 7.0.0"
   },
+
   "main": "index.js",
   "scripts": {
     "build-client": "webpack",
@@ -44,6 +45,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.1",
+    "babel-core": "^6.26.3",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^6.0.0",
     "express": "^4.16.4",
