@@ -12,7 +12,10 @@ export const FAILED_TO_GET_PRODUCTS = 'FAILED_TO_GET_PRODUCTS'
 /** ACTION CREATORS **/
 
 export const gotProducts = products => ({type: GOT_PRODUCTS, products})
-export const failedToGetProducts = err => ({type: FAILED_TO_GET_PRODUCTS, err})
+export const failedToGetProducts = error => ({
+  type: FAILED_TO_GET_PRODUCTS,
+  error
+})
 
 /** THUNKS **/
 
@@ -20,6 +23,7 @@ export const getProducts = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/products')
+
       dispatch(gotProducts(data))
     } catch (err) {
       dispatch(failedToGetProducts(err))
@@ -30,11 +34,11 @@ export const getProducts = () => {
 /** REDUCER  **/
 
 export default function(state = initAllProducts, action) {
-  switch (action) {
+  switch (action.type) {
     case GOT_PRODUCTS:
       return action.products
     case FAILED_TO_GET_PRODUCTS:
-      return action.err
+      return action.error
     default:
       return state
   }

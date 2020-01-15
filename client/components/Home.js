@@ -1,26 +1,18 @@
 import React from 'react'
-import enzyme, {shallow} from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-enzyme.configure({
-  adapter: new Adapter()
-})
 
-import Thumbnail from './Thumbnail'
+import AllProducts from './AllProducts'
 
 // NOTE: all css is temporary, will replace with better CSS after design is finalized
 
-const Home = () => {
-  return (
-    <div>
-      <h2>All products</h2>
-
-      <div style={{display: 'flex'}}>
-        <Thumbnail />
-        <Thumbnail />
-        <Thumbnail />
+export class Home extends React.Component {
+  render() {
+    return (
+      <div>
+        <h2>All products</h2>
+        <AllProducts />
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default Home
