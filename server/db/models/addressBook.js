@@ -2,7 +2,11 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Address = db.define('address', {
-  street: {
+  address1: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  address2: {
     type: Sequelize.STRING,
     allowNull: true
   },
@@ -82,10 +86,11 @@ const Address = db.define('address', {
   zip: {
     type: Sequelize.INTEGER,
     allowNull: true
-  },
-  userId: {
-    type: Sequelize.INTEGER
   }
 })
 
 module.exports = Address
+
+// const addressWithUsers = await Address.findAll({
+//   include: [{model: User}]
+// })
