@@ -1,6 +1,7 @@
 import React from 'react'
 import {getProducts} from '../store/products'
 import {connect} from 'react-redux'
+import {addToCart} from '../store/cart'
 
 class SingleProduct extends React.Component {
   constructor(props) {
@@ -14,6 +15,8 @@ class SingleProduct extends React.Component {
         description: ''
       }
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   async componentDidMount() {
@@ -29,6 +32,11 @@ class SingleProduct extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    const quantity = Number(event.target.quantity.value)
+    const size = event.target.size.value
+    const id = this.state.product.id
+
+    this.props.addToCart(id, quantity, size)
   }
 
   render() {
@@ -43,16 +51,22 @@ class SingleProduct extends React.Component {
         <div id="product-details">
           <p id="product-description">{product.description}</p>
 
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div className="radio-group">
               <label htmlFor="size">Size</label>
               <div>
-                <input type="radio" name="size" id="11x7" defaultChecked />
+                <input
+                  type="radio"
+                  name="size"
+                  value="11x7"
+                  id="11x7"
+                  defaultChecked
+                />
                 <label htmlFor="11x17">11 x 17</label>
               </div>
 
               <div>
-                <input type="radio" name="size" id="24x36" />
+                <input type="radio" name="size" value="24x36" id="24x36" />
                 <label htmlFor="24x36">24 x 36</label>
               </div>
             </div>
@@ -75,7 +89,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getProducts: () => dispatch(getProducts())
+  getProducts: () => dispatch(getProducts()),
+  addToCart: (id, amt, size) => dispatch(addToCart(id, amt, size))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)

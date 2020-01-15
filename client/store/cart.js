@@ -10,7 +10,12 @@ export const UPDATE_ITEM = 'UPDATE_ITEM'
 
 /** ACTION CREATORS **/
 
-export const addToCart = (id, amt = 1) => ({type: ADD_TO_CART, id, amt})
+export const addToCart = (id, amt = 1, size) => ({
+  type: ADD_TO_CART,
+  id,
+  amt,
+  size
+})
 
 export const rmFromCart = id => ({type: REMOVE_FROM_CART, id})
 
@@ -25,10 +30,10 @@ export default function(state = defaultCart, action) {
 
   switch (action.type) {
     case ADD_TO_CART: {
-      if (itemIndex > -1) {
+      if (itemIndex > -1 && action.size === newCart[itemIndex].size) {
         newCart[itemIndex].amt += action.amt
       } else {
-        newCart.push({id: action.id, amt: action.amt})
+        newCart.push({id: action.id, size: action.size, amt: action.amt})
       }
       return newCart
     }

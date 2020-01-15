@@ -4,6 +4,7 @@ import Thumbnail from './Thumbnail'
 
 class Cart extends Component {
   render() {
+    console.log(this.props.itemsInCart)
     const itemsInCart = this.props.itemsInCart
     const isCartEmpty = this.props.itemsInCart.length === 0
     return (
@@ -12,12 +13,13 @@ class Cart extends Component {
           <h2>Your cart is empty</h2>
         ) : (
           <ul>
-            {itemsInCart.map(item => {
+            {itemsInCart.map(product => {
               return (
-                <li key={item.product.id}>
+                <li key={product.id}>
                   {' '}
-                  <Thumbnail />
-                  <p>qty: {item.amt}</p>
+                  <Thumbnail product={product} />
+                  <p>size: {product.size}</p>
+                  <p>qty: {product.amt}</p>
                 </li>
               )
             })}
@@ -33,24 +35,10 @@ class Cart extends Component {
 
 const mapState = state => {
   return {
-    //using dummydata for now
-    itemsInCart: [
-      {
-        product: {
-          imageUrl: 'https://via.placeholder.com/250',
-          name: 'The Squidward',
-          price: 18.99,
-          description:
-            'Natural white, matte, ultra smooth background. 100% cotton, acid and lignin-free archival paper. Custom trimmed with border for framing; 1" for x-small and small, 2" for all larger sizes. Every order is custom made just for you',
-          category: ['print'],
-          filter: ['funny'],
-          id: 1
-        },
-        amt: 1
-      }
-    ]
+    itemsInCart: state.cart
   }
 }
+
 const mapDispatch = dispatch => {
   return {}
 }
