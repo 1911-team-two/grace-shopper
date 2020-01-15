@@ -7,20 +7,29 @@ export class AddressForm extends React.Component {
   }
 
   render() {
+    let values = this.props.values
+    let type = this.props.type
+
     return (
       <div>
         <h3>{this.props.title}</h3>
 
-        <form>
+        <fieldset name={this.props.type}>
           <label htmlFor="firstName">First Name</label>
           <input
             type="text"
-            name={`firstName_${this.props.type}`}
+            name={`${this.props.type}_firstName`}
+            value={values[`${type}_firstName`]}
             onChange={this.props.handleChange}
           />
 
           <label htmlFor="lastName">Last Name</label>
-          <input type="text" name="lastName" />
+          <input
+            type="text"
+            name={`${this.props.type}_lastName`}
+            value={values[`${type}_lastName`]}
+            onChange={this.props.handleChange}
+          />
 
           <label htmlFor="addressLineOne">Address</label>
           <input type="text" name="addressLineOne" />
@@ -36,7 +45,7 @@ export class AddressForm extends React.Component {
 
           <label htmlFor="zip">Zip Code</label>
           <input type="text" name="zip" />
-        </form>
+        </fieldset>
       </div>
     )
   }

@@ -4,31 +4,52 @@ import AddressForm from './AddressForm'
 export class Checkout extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      shipping_firstName: '',
+      shipping_lastName: '',
+      shipping_addressLineOne: '',
+      shipping_addressLineTwo: '',
+      shipping_city: '',
+      shipping_state: '',
+      shipping_zip: '',
+      billing_firstName: '',
+      billing_lastName: '',
+      billing_addressLineOne: '',
+      billing_addressLineTwo: '',
+      billing_city: '',
+      billing_state: '',
+      billing_zip: ''
+    }
 
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(e) {
-    console.log(e.target.name)
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
 
-    console.log(this.state)
+  handleSubmit(e) {
+    e.preventDefault()
+    let userInfoToBePosted = {
+      // firstName: this.state
+    }
   }
 
   render() {
     return (
-      <div>
+      <form onSubmit={this.handleSubmit}>
         <h2>Checkout</h2>
         <AddressForm
           title="Shipping Address"
+          values={this.state}
           handleChange={this.handleChange}
           type="shipping"
         />
 
-        <div className="payment_wrapper">
+        <fieldset className="payment_wrapper">
           <h3>Payment</h3>
           <p>This is placeholder for payment details</p>
           <label htmlFor="cc_number">Card Number</label>
@@ -42,13 +63,18 @@ export class Checkout extends React.Component {
 
           <label htmlFor="security">Security Code</label>
           <input type="text" name="security" />
-        </div>
+        </fieldset>
 
-        <AddressForm title="Billing Address" />
+        {/* <AddressForm
+          handleChange={this.handleChange}
+          values={this.state.billing}
+          title="Billing Address"
+          type="billing"
+        /> */}
 
         {/* cart info here */}
-        {/* submit button here */}
-      </div>
+        <input type="submit" value="Send Request" />
+      </form>
     )
   }
 }
