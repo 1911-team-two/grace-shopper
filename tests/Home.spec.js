@@ -1,50 +1,40 @@
-import React from 'react'
+/* global describe beforeEach it */
+
 import {expect} from 'chai'
-import {mount, shallow} from 'enzyme'
-import {Provider} from 'react-redux'
-import TestRenderer from 'react-test-renderer'
+import React from 'react'
+import {shallow} from 'enzyme'
+// import Adapter from 'enzyme-adapter-react-16'
+// import configureMockStore from 'redux-mock-store'
 
 import {Home} from '../client/components/Home'
-import Thumbnail from '../client/components/Thumbnail'
+import AllProducts from '../client/components/AllProducts'
+// import Thumbnail from '../client/components/Thumbnail'
 
-import configureStore from 'redux-mock-store'
+// const mockStore = configureMockStore()
+// const initialState = [{name: 'Example'}]
+// const store = mockStore(initialState)
 
-import {configure} from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-configure({adapter: new Adapter()})
+describe('Home', () => {
+  let wrapper
 
-let mockStore = configureStore([])
+  beforeEach('set up wrapper', () => {
+    let exampleProducts = [1, 2, 3]
+    let mockGetProducts = () => {}
 
-describe('<Home/>', () => {
-  let store
-  let component
-
-  // beforeEach(() => {
-  // store = mockStore({
-  //   myState: 'sample text'
-  // })
-  // component = TestRenderer.create(
-  //   <Provider store={store}>
-  //     <Home />
-  //   </Provider>
-  // })
-
-  // it('renders three PLACEHOLDER thumnails', () => {
-  //   const wrapper = shallow(<Home />)
-  //   expect(wrapper.find(Thumbnail)).to.have.lengthOf(3)
-  // })
-
-  it.only('renders as many thumbnails as there are items', () => {
-    store = mockStore({
-      products: []
-    })
-
-    component = TestRenderer.create(
-      <Provider store={store}>
-        <Home />
-      </Provider>
+    wrapper = shallow(
+      <Home getProducts={mockGetProducts} allProducts={exampleProducts} />
     )
-
-    console.log(component.toTree())
   })
+
+  it('renders a header in an h2', () => {
+    expect(wrapper.find('h2').text()).to.equal('All products')
+  })
+
+  it('renders the AllProducts component', () => {
+    expect(wrapper.find(AllProducts)).to.have.lengthOf(1)
+  })
+
+  // it('renders the correct number of Thumbnail components', () => {
+  //   expect(wrapper.find(Thumbnail)).to.equal(3)
+  // })
 })
