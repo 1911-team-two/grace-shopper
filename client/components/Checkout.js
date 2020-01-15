@@ -1,9 +1,11 @@
 import React from 'react'
+import AddressForm from './AddressForm'
 
 export const Checkout = () => {
   return (
     <div>
-      <p>Checkout</p>
+      <h2>Checkout</h2>
+      <AddressForm title="Billing Address" />
     </div>
   )
 }
