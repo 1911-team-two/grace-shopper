@@ -27,6 +27,10 @@ class SingleProduct extends React.Component {
     this.setState({product})
   }
 
+  handleSubmit(event) {
+    event.preventDefault()
+  }
+
   render() {
     const product = this.state.product
     return (
