@@ -3,7 +3,7 @@ import React from 'react'
 export const AddressForm = props => {
   return (
     <div>
-      <h2>{props.title}</h2>
+      <h3>{props.title}</h3>
 
       <form>
         {/* first name, last name, address 1, address 2, city, state , zip*/}

@@ -13,8 +13,8 @@ describe('<AddressForm />', () => {
     wrapper = shallow(<AddressForm />)
   })
 
-  it('renders a header in an h2', () => {
-    expect(wrapper.find('h2')).to.have.lengthOf(1)
+  it('renders a header in an h3', () => {
+    expect(wrapper.find('h3')).to.have.lengthOf(1)
   })
 
   it('renders a form', () => {
