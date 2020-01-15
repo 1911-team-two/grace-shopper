@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 class SingleProduct extends React.Component {
   constructor(props) {
     super(props)
+    // Initialize empty product to avoid undefined issues on render
     this.state = {
       product: {
         name: '',
@@ -17,6 +18,8 @@ class SingleProduct extends React.Component {
 
   async componentDidMount() {
     await this.props.getProducts()
+
+    // Find product that matches id in link
     const product = this.props.allProducts.find(
       prod => prod.id === Number(this.props.match.params.id)
     )
