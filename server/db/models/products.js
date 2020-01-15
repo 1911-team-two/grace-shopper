@@ -15,8 +15,9 @@ const Product = db.define('product', {
     }
   },
   price: {
-    type: Sequelize.FLOAT,
-    isFloat: true,
+    type: Sequelize.INTEGER,
+    //unit is cents
+    //when rendering, convert to str, add decimal before last two nums
     allowNull: false,
     validate: {
       notEmpty: true
@@ -28,21 +29,23 @@ const Product = db.define('product', {
     validate: {
       notEmpty: true
     }
-  },
-  category: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
-    validate: {
-      isIn: [['print']]
-    },
-    allowNull: false
-  },
-  filter: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
-    validate: {
-      isIn: [['nature', 'art', 'funny']]
-    },
-    allowNull: false
   }
+  //extra flare:
+
+  // category: {
+  //   type: Sequelize.ARRAY(Sequelize.STRING),
+  //   validate: {
+  //     isIn: [['print']]
+  //   },
+  //   allowNull: false
+  // },
+  // filter: {
+  //   type: Sequelize.ARRAY(Sequelize.STRING),
+  //   validate: {
+  //     isIn: [['nature', 'art', 'funny']]
+  //   },
+  //   allowNull: false
+  // }
 })
 
 module.exports = Product
