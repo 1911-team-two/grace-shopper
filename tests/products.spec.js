@@ -2,8 +2,8 @@
 
 const {expect} = require('chai')
 const request = require('supertest')
-const db = require('../db')
-const app = require('../index')
+const db = require('../server/db')
+const app = require('../server/index')
 const Product = db.model('product')
 
 describe('Product routes', () => {
@@ -17,7 +17,7 @@ describe('Product routes', () => {
         name: 'Tote',
         price: 23.5,
         description: 'The art on this bag is by Picaso',
-        category: 'bags',
+        category: ['print'],
         filter: ['art']
       })
     })
@@ -42,7 +42,9 @@ describe('Product routes', () => {
       expect(res.body.description).to.be.equal(
         'The art on this bag is by Picaso'
       )
-      expect(res.body.category).to.be.equal('bags')
+      expect(res.body.category).to.be.an('array')
+
+      expect(res.body.category[0]).to.be.equal('print')
       expect(res.body.filter).to.be.an('array')
       expect(res.body.filter[0]).to.be.equal('art')
     })

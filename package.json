@@ -5,14 +5,6 @@
   "engines": {
     "node": ">= 7.0.0"
   },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>tests/setup/setupEnzyme.js"
-  ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/__tests__/setup/"
-    ]
-  },
   "main": "index.js",
   "scripts": {
     "build-client": "webpack",
