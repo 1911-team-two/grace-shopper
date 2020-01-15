@@ -1,14 +1,14 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-const Thumbnail = () => {
+const Thumbnail = props => {
+  const product = props.product
   return (
     <div>
-      <Link to="/product/1">
-        <img src="https://via.placeholder.com/250" alt="" />
-        <p>Placeholder Name</p>
-        <p>Artist Name</p>
-        <p>$00.00</p>
+      <Link to={`/product/${product.id}`}>
+        <img src={product.imageUrl} alt={product.name} />
+        <p>{product.name}</p>
+        <p>${product.price}</p>
       </Link>
     </div>
   )

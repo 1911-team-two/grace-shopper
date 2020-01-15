@@ -6,6 +6,7 @@ import Thumbnail from './Thumbnail'
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getProducts()
+    console.log(this.props.allProducts)
   }
   render() {
     return (

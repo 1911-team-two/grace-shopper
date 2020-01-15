@@ -21,7 +21,7 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/product/1" component={SingleProduct} />
+        <Route path="/product/:id" component={SingleProduct} />
         <Route path="/" component={Home} />
         {isLoggedIn && (
           <Switch>
