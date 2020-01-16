@@ -26,6 +26,12 @@ async function seed() {
       password: 'iloveham',
       fullName: 'Danny Devito',
       isAdmin: false
+    },
+    {
+      email: 'rduhamel77@gmail.com',
+      password: 'hello',
+      fullName: 'Rebecca Duhamel',
+      isAdmin: true
     }
   ]
 
