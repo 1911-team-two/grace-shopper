@@ -1,5 +1,6 @@
 import React from 'react'
 import AddressForm from './AddressForm'
+import CheckoutCart from './CheckoutCart'
 
 export class Checkout extends React.Component {
   constructor() {
@@ -72,7 +73,7 @@ export class Checkout extends React.Component {
           type="billing"
         />
 
-        <h3>Cart Review Here</h3>
+        <CheckoutCart />
         <input type="submit" value="Send Request" />
       </form>
     )
