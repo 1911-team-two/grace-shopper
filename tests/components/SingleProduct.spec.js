@@ -3,7 +3,7 @@ import {expect} from 'chai'
 import enzyme, {mount, shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
-import SingleProduct from '../client/components/SingleProduct'
+import SingleProduct from '../../client/components/SingleProduct'
 
 enzyme.configure({
   adapter: new Adapter()

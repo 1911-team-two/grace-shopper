@@ -40,14 +40,16 @@ router.post('/', (req, res) => {
   res.status(201).json(req.session.cart)
 })
 
-router.delete('/', (req, res) => {
-  const {id} = req.body
-  req.session.cart = req.session.cart.filter(item => item.product.id !== id)
-  res.status(204).json(req.session.cart)
+router.delete('/:id', (req, res) => {
+  req.session.cart = req.session.cart.filter(item => {
+    return item.product.id !== Number(req.params.id)
+  })
+
+  res.status(200).json(req.session.cart)
 })
 
 router.put('/', (req, res) => {
   const {id, qty} = req.body
   editQty(req.session.cart, id, qty)
-  res.status(204).json(req.session.cart)
+  res.status(200).json(req.session.cart)
 })

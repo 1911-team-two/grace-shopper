@@ -1,8 +1,8 @@
 import {expect} from 'chai'
 import React from 'react'
 import {shallow} from 'enzyme'
-import {AllProducts} from '../client/components/AllProducts'
-import Thumbnail from '../client/components/Thumbnail'
+import {AllProducts} from '../../client/components/AllProducts'
+import Thumbnail from '../../client/components/Thumbnail'
 
 describe('<AllProducts/>', () => {
   let wrapper
