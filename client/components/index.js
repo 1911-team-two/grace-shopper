@@ -8,5 +8,6 @@ export {default as Home} from './home'
 export {default as SingleProduct} from './SingleProduct'
 export {default as Cart} from './Cart'
 export {default as UserProfile} from './UserProfile'
+export {default as OrderProfile} from './SingleOrder'
 
 export {Login, Signup} from './auth-form'

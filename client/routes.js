@@ -11,6 +11,7 @@ import {
   UserProfile
 } from './components'
 import {me} from './store'
+import SingleOrder from './components/SingleOrder'
 
 /**
  * COMPONENT
@@ -30,6 +31,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/product/:id" component={SingleProduct} />
+        <Route exact path="/profile/:orderId" component={SingleOrder} />
         <Route path="/profile" component={UserProfile} />
         <Route path="/" component={Home} />
 

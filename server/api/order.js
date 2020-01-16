@@ -30,3 +30,24 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:orderId', async (req, res, next) => {
+  try {
+    if (req.user.id) {
+      const singleOrder = await Order.findOne({
+        where: {
+          userId: req.user.id
+        },
+        include: {
+          model: OrderProduct,
+          include: [Product]
+        }
+      })
+      res.json(singleOrder)
+    } else {
+      res.sendStatus(401)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
