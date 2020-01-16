@@ -74,6 +74,7 @@ class SingleProduct extends React.Component {
               <label htmlFor="quantity">Quantity</label>
               <input type="number" min="1" name="quantity" defaultValue="1" />
             </div>
+
             <p>${product.price / 100}</p>
             <button type="submit">Add to Cart</button>
           </form>

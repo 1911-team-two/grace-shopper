@@ -21,6 +21,7 @@ Order.hasMany(OrderProduct)
 OrderProduct.belongsTo(Order)
 
 Product.hasMany(OrderProduct)
+OrderProduct.belongsTo(Product)
 
 // Inventory.hasMany(OrderProduct)
 
