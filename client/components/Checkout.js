@@ -74,7 +74,11 @@ export class Checkout extends React.Component {
         />
 
         <CheckoutCart />
-        <input type="submit" value="Send Request" />
+        <input
+          type="submit"
+          value="Send Request"
+          handleSubmit={this.handleSubmit}
+        />
       </form>
     )
   }
