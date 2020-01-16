@@ -10,9 +10,8 @@ class UserProfile extends Component {
     return (
       <div>
         <h1>{user.fullName}</h1>
-
-        <br />
         <h3>Your Order History</h3>
+        <hr />
       </div>
     )
   }
