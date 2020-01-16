@@ -1,6 +1,8 @@
 import React from 'react'
-import {getProducts} from '../store/products'
+import axios from 'axios'
 import {connect} from 'react-redux'
+
+import {getProducts} from '../store/products'
 import {addToCart} from '../store/cart'
 
 class SingleProduct extends React.Component {
@@ -25,7 +27,7 @@ class SingleProduct extends React.Component {
       prod => prod.id === Number(this.props.match.params.id)
     )
 
-    this.setState({product})
+    if (product) this.setState({product})
   }
 
   handleSubmit(event) {
@@ -33,6 +35,7 @@ class SingleProduct extends React.Component {
     const quantity = Number(event.target.quantity.value)
     // const size = event.target.size.value
 
+    // await axios.post('/api/cart/', this.state.product, quantity)
     this.props.addToCart(this.state.product, quantity)
   }
 
@@ -89,7 +92,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getProducts: () => dispatch(getProducts()),
-  addToCart: (id, qty, size) => dispatch(addToCart(id, qty, size))
+  addToCart: (product, qty) => dispatch(addToCart({product, qty}))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)

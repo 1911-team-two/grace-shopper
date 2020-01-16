@@ -1,10 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-// import Thumbnail from './Thumbnail'
+
+import {getCart} from '../store/cart'
 import CartItem from './cartitem'
 
 class Cart extends Component {
+  componentDidMount() {
+    this.props.getCart()
+  }
+
   render() {
     console.log(this.props.itemsInCart)
     const itemsInCart = this.props.itemsInCart
@@ -39,5 +44,10 @@ const mapState = state => {
   }
 }
 
+const mapDispatch = dispatch => {
+  return {
+    getCart: () => dispatch(getCart())
+  }
+}
 
-export default connect(mapState)(Cart)
+export default connect(mapState, mapDispatch)(Cart)
