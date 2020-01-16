@@ -2,15 +2,16 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 const CartItem = props => {
-  console.log(props)
+  const item = props.item
+  const product = props.item.product
   return (
     <div>
-      <Link to={`/product/${props.item.product.id}`}>
-        <img src="https://via.placeholder.com/250" alt="" />
-        <p>{props.item.product.name}</p>
-        <p>${props.item.product.price}</p>
-        <p>Qty: {props.item.amt}</p>
+      <Link to={`/product/${product.id}`}>
+        <img src={product.imageUrl} alt="" />
+        <p>{product.name}</p>
       </Link>
+      <p>Qty: {item.qty}</p>
+      <p>Total: ${(product.price * item.qty) / 100}</p>
     </div>
   )
 }

@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import Thumbnail from './Thumbnail'
+
+// import Thumbnail from './Thumbnail'
+import CartItem from './cartitem'
 
 class Cart extends Component {
   render() {
+    console.log(this.props.itemsInCart)
     const itemsInCart = this.props.itemsInCart
     const isCartEmpty = this.props.itemsInCart.length === 0
     return (
@@ -12,13 +15,11 @@ class Cart extends Component {
           <h2>Your cart is empty</h2>
         ) : (
           <ul>
-            {itemsInCart.map(product => {
+            {itemsInCart.map(cartItem => {
+              const product = cartItem.product
               return (
                 <li key={product.id}>
-                  {' '}
-                  <Thumbnail product={product} />
-                  <p>size: {product.size}</p>
-                  <p>qty: {product.amt}</p>
+                  <CartItem item={cartItem} />
                 </li>
               )
             })}
@@ -38,8 +39,5 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
-  return {}
-}
 
-export default connect(mapState, mapDispatch)(Cart)
+export default connect(mapState)(Cart)
