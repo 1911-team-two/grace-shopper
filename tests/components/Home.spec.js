@@ -6,8 +6,8 @@ import {shallow} from 'enzyme'
 // import Adapter from 'enzyme-adapter-react-16'
 // import configureMockStore from 'redux-mock-store'
 
-import {Home} from '../client/components/Home'
-import AllProducts from '../client/components/AllProducts'
+import {Home} from '../../client/components/Home'
+import AllProducts from '../../client/components/AllProducts'
 // import Thumbnail from '../client/components/Thumbnail'
 
 // const mockStore = configureMockStore()
