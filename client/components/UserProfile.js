@@ -11,7 +11,6 @@ class UserProfile extends Component {
 
   render() {
     const user = this.props.user
-    console.log('USER', user)
     const orders = this.props.orders
     console.log('ORDER', orders)
 
