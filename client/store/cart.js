@@ -81,12 +81,6 @@ export const changeQty = (item, qty) => async dispatch => {
 /** REDUCER  **/
 
 export default function(state = defaultCart, action) {
-  // Behavior depends on whether or not the item is already in cart, so check for that first
-  // const itemIndex = state.findIndex(
-  //   item => item.product.id === action.product.id
-  // )
-  // let newCart = [...state]
-
   switch (action.type) {
     case GET_CART:
       return action.cart

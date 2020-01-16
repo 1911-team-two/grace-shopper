@@ -26,7 +26,7 @@ class SingleProduct extends React.Component {
       prod => prod.id === Number(this.props.match.params.id)
     )
 
-    this.setState({product})
+    if (product) this.setState({product})
   }
 
   handleSubmit(event) {
