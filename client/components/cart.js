@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import Thumbnail from './Thumbnail'
 
 class Cart extends Component {
   render() {
@@ -16,8 +15,9 @@ class Cart extends Component {
             {itemsInCart.map(product => {
               return (
                 <li key={product.id}>
-                  {' '}
-                  <Thumbnail product={product} />
+                  <img src={product.imageUrl} alt={product.name} />
+                  <p>{product.name}</p>
+                  <p>${product.price}</p>
                   <p>size: {product.size}</p>
                   <p>qty: {product.amt}</p>
                 </li>
