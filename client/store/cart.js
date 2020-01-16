@@ -1,8 +1,13 @@
+import axios from 'axios'
+
 /** INIT  **/
 
 const defaultCart = []
 
 /** ACTION TYPES **/
+
+export const GET_CART = 'GET_CART'
+export const UPDATE_CART = 'UPDATE_CART'
 
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
@@ -10,40 +15,78 @@ export const UPDATE_ITEM = 'UPDATE_ITEM'
 
 /** ACTION CREATORS **/
 
-export const addToCart = (id, amt = 1) => ({type: ADD_TO_CART, id, amt})
+export const gotCart = cart => ({type: GET_CART, cart})
 
-export const rmFromCart = id => ({type: REMOVE_FROM_CART, id})
+export const updateCart = cart => ({
+  type: UPDATE_CART,
+  cart
+})
 
-export const updateItem = (id, amt) => ({type: UPDATE_ITEM, id, amt})
+// export const addToCart = (product, qty = 1) => ({
+//   type: ADD_TO_CART,
+//   product,
+//   qty
+// })
+
+// export const rmFromCart = product => ({
+//   type: REMOVE_FROM_CART,
+//   product
+// })
+
+// export const updateItem = (product, qty) => ({
+//   type: UPDATE_ITEM,
+//   product,
+//   qty
+// })
+
+/** THUNKS **/
+
+export const getCart = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/api/cart')
+    return dispatch(gotCart(data))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const addToCart = item => async dispatch => {
+  try {
+    const {data} = await axios.post('/api/cart', item)
+    return dispatch(updateCart(data))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const rmFromCart = item => async dispatch => {
+  try {
+    const {data} = await axios.delete('/api/cart', item.product.id)
+    return dispatch(updateCart(data))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const changeQty = (item, qty) => async dispatch => {
+  try {
+    const {id} = item.product
+    const {data} = await axios.put('/api/cart', {id, qty})
+    return dispatch(updateCart(data))
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 /** REDUCER  **/
 
 export default function(state = defaultCart, action) {
-  // Behavior depends on whether or not the item is already in cart, so check for that first
-  const itemIndex = state.findIndex(item => item.id === action.id)
-  let newCart = [...state]
-
   switch (action.type) {
-    case ADD_TO_CART: {
-      if (itemIndex > -1) {
-        newCart[itemIndex].amt += action.amt
-      } else {
-        newCart.push({id: action.id, amt: action.amt})
-      }
-      return newCart
-    }
+    case GET_CART:
+      return action.cart
+    case UPDATE_CART:
+      return action.cart
 
-    case REMOVE_FROM_CART:
-      if (itemIndex > -1) newCart.splice(itemIndex, 1)
-      return newCart
-
-    case UPDATE_ITEM: {
-      if (itemIndex > -1) {
-        newCart[itemIndex].amt = action.amt
-      }
-
-      return newCart
-    }
     default:
       return state
   }
