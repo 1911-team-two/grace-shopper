@@ -1,3 +1,17 @@
+/**
+ * In your development environment, you can keep all of your
+ * app's secret API keys in a file called `secrets.js`, in your project
+ * root. This file is included in the .gitignore - it will NOT be tracked
+ * or show up on Github. On your production server, you can add these
+ * keys as environment variables, so that they can still be read by the
+ * Node process on process.env
+ *
+ * This should be at the very beginning because it needs to get the secrets
+ * before the other stuffs load.
+ */
+
+if (process.env.NODE_ENV !== 'production') require('../secrets')
+
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
@@ -17,16 +31,6 @@ module.exports = app
 if (process.env.NODE_ENV === 'test') {
   after('close the session store', () => sessionStore.stopExpiringSessions())
 }
-
-/**
- * In your development environment, you can keep all of your
- * app's secret API keys in a file called `secrets.js`, in your project
- * root. This file is included in the .gitignore - it will NOT be tracked
- * or show up on Github. On your production server, you can add these
- * keys as environment variables, so that they can still be read by the
- * Node process on process.env
- */
-if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
