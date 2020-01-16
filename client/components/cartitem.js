@@ -11,7 +11,7 @@ const CartItem = props => {
         <p>{product.name}</p>
       </Link>
       <p>Qty: {item.qty}</p>
-      <p>Total: {product.price * item.qty}</p>
+      <p>Total: ${(product.price * item.qty) / 100}</p>
     </div>
   )
 }

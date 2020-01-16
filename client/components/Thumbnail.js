@@ -8,7 +8,7 @@ const Thumbnail = props => {
       <Link to={`/product/${product.id}`}>
         <img src={product.imageUrl} alt={product.name} />
         <p>{product.name}</p>
-        {props.inCart ? '' : <p>${product.price}</p>}
+        <p>${product.price / 100}</p>
       </Link>
     </div>
   )
