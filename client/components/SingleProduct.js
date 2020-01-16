@@ -19,10 +19,7 @@ class SingleProduct extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  async componentDidMount() {
-    await this.props.getProducts()
-
-    // Find product that matches id in link
+  componentDidMount() {
     const product = this.props.allProducts.find(
       prod => prod.id === Number(this.props.match.params.id)
     )
@@ -33,10 +30,9 @@ class SingleProduct extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     const quantity = Number(event.target.quantity.value)
-    const size = event.target.size.value
-    const id = this.state.product.id
+    // const size = event.target.size.value
 
-    this.props.addToCart(id, quantity, size)
+    this.props.addToCart(this.state.product, quantity)
   }
 
   render() {
@@ -52,7 +48,7 @@ class SingleProduct extends React.Component {
           <p id="product-description">{product.description}</p>
 
           <form onSubmit={this.handleSubmit}>
-            <div className="radio-group">
+            {/* <div className="radio-group">
               <label htmlFor="size">Size</label>
               <div>
                 <input
@@ -69,7 +65,7 @@ class SingleProduct extends React.Component {
                 <input type="radio" name="size" value="24x36" id="24x36" />
                 <label htmlFor="24x36">24 x 36</label>
               </div>
-            </div>
+            </div> */}
 
             <div>
               <label htmlFor="quantity">Quantity</label>
@@ -90,7 +86,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getProducts: () => dispatch(getProducts()),
-  addToCart: (id, amt, size) => dispatch(addToCart(id, amt, size))
+  addToCart: (id, qty, size) => dispatch(addToCart(id, qty, size))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
