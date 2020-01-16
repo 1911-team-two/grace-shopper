@@ -1,6 +1,6 @@
 import React from 'react'
 import AddressForm from './AddressForm'
-import CheckoutCart from './CheckoutCart'
+import CheckoutCart from './CheckoutReview'
 
 export class Checkout extends React.Component {
   constructor() {

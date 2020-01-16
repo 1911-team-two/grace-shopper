@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* global describe beforeEach it */
 
 import {expect} from 'chai'
@@ -7,7 +8,9 @@ import {shallow} from 'enzyme'
 import {Checkout} from '../../client/components/Checkout'
 import {AddressForm} from '../../client/components/AddressForm'
 import AddressFormInput from '../../client/components/AddressFormInput'
-import {CheckoutCart} from '../../client/components/CheckoutCart'
+import {CheckoutReview} from '../../client/components/CheckoutReview'
+import CartItem from '../../client/components/cartitem'
+import {Cart} from '../../client/components/index'
 
 describe('<Checkout />', () => {
   let wrapper
@@ -114,17 +117,36 @@ describe('<Checkout />', () => {
     })
   })
 
-  describe('<CheckoutCart />', () => {
-    let checkoutCartWrapper
+  describe('<CheckoutReview />', () => {
+    let reviewWrapper
 
     beforeEach(() => {
-      checkoutCartWrapper = shallow(<CheckoutCart />)
+      const mockGetCart = () => {}
+      const mockCart = [{name: 'Sun and Moon'}, {name: 'Sword and Shield'}]
+      reviewWrapper = shallow(
+        <CheckoutReview getCart={mockGetCart} cart={mockCart} />
+      )
     })
 
     it('renders a title in an h3', () => {
-      expect(checkoutCartWrapper.find('h3').text()).to.equal(
-        'Review Your Order'
-      )
+      expect(reviewWrapper.find('h3').text()).to.equal('Review Your Order')
     })
+
+    it('renders a component for each unique item in the cart', () => {
+      expect(reviewWrapper.find(CartItem)).to.have.lengthOf(2)
+    })
+
+    // describe('<CheckoutReviewItem />', () => {
+    //   let itemWrapper
+
+    //   beforeEach(() => {
+    //     let mockProduct = {name: 'Leaf Green'}
+    //     itemWrapper = shallow(<CheckoutReviewItem product={mockProduct} />)
+    //   })
+
+    //   it('renders the name of the item', () => {
+    //     expect(itemWrapper.find('.productName').text()).to.equal('Leaf Green')
+    //   })
+    // })
   })
 })
