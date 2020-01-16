@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-
 import {getCart} from '../store/cart'
 import CartItem from './cartitem'
 
@@ -11,7 +10,6 @@ class Cart extends Component {
   }
 
   render() {
-    console.log(this.props.itemsInCart)
     const itemsInCart = this.props.itemsInCart
     const isCartEmpty = this.props.itemsInCart.length === 0
     return (
