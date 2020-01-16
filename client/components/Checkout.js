@@ -65,12 +65,12 @@ export class Checkout extends React.Component {
           <input type="text" name="security" />
         </fieldset>
 
-        {/* <AddressForm
-          handleChange={this.handleChange}
-          values={this.state.billing}
+        <AddressForm
           title="Billing Address"
+          values={this.state}
+          handleChange={this.handleChange}
           type="billing"
-        /> */}
+        />
 
         {/* cart info here */}
         <input type="submit" value="Send Request" />

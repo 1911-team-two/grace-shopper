@@ -32,19 +32,44 @@ export class AddressForm extends React.Component {
           />
 
           <label htmlFor="addressLineOne">Address</label>
-          <input type="text" name="addressLineOne" />
+          <input
+            type="text"
+            name={`${this.props.type}_addressLineOne`}
+            value={values[`${type}_addressLineOne`]}
+            onChange={this.props.handleChange}
+          />
 
           <label htmlFor="addressLineTwo">Apartment (optional)</label>
-          <input type="text" name="addressLineTwo" />
+          <input
+            type="text"
+            name={`${this.props.type}_addressLineTwo`}
+            value={values[`${type}_addressLineTwo`]}
+            onChange={this.props.handleChange}
+          />
 
           <label htmlFor="city">City</label>
-          <input type="text" name="city" />
+          <input
+            type="text"
+            name={`${this.props.type}_city`}
+            value={values[`${type}_city`]}
+            onChange={this.props.handleChange}
+          />
 
           <label htmlFor="state">State</label>
-          <input type="text" name="state" />
+          <input
+            type="text"
+            name={`${this.props.type}_state`}
+            value={values[`${type}_state`]}
+            onChange={this.props.handleChange}
+          />
 
           <label htmlFor="zip">Zip Code</label>
-          <input type="text" name="zip" />
+          <input
+            type="text"
+            name={`${this.props.type}_zip`}
+            value={values[`${type}_zip`]}
+            onChange={this.props.handleChange}
+          />
         </fieldset>
       </div>
     )

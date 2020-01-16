@@ -25,4 +25,23 @@ describe('<Checkout />', () => {
   it('renders a payment information form', () => {
     expect(wrapper.find('.payment_wrapper')).have.lengthOf(1)
   })
+
+  // it('updates state on input change', () => {
+  // const input = wrapper
+  //   .find(AddressForm)
+  //   .first()
+  //   .simulate('change', {target: {value: 'example'}})
+
+  // const input = wrapper
+  //   .find(AddressForm)
+  //   .dive()
+  //   .first()
+  //   .simulate('change', {target: {value: 'example'}})
+
+  // console.log('input:', input)
+  // console.log(wrapper.state())
+
+  // expect(wrapper.state().shipping_FirstName).to.equal('example')
+  // // expect(input).to.be('')
+  // })
 })
