@@ -2,19 +2,6 @@
 import React, {Component} from 'react'
 
 export class AddressFormInput extends Component {
-  constructor() {
-    super()
-    // this.state = {
-    //   name: ''
-    // }
-
-    // this.handleChange = this.handleChange.bind(this)
-  }
-
-  // handleChange(e) {
-  //   this.setState({name: e.target.value})
-  // }
-
   render() {
     let labels = {
       firstName: 'First Name',

@@ -72,7 +72,7 @@ export class Checkout extends React.Component {
           type="billing"
         />
 
-        {/* cart info here */}
+        <h3>Cart Review Here</h3>
         <input type="submit" value="Send Request" />
       </form>
     )
