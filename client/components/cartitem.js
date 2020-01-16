@@ -5,8 +5,12 @@ import {connect} from 'react-redux'
 import {rmFromCart, changeQty} from '../store/cart'
 
 class CartItem extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleQtyChange = this.handleQtyChange.bind(this)
+  }
+
   handleQtyChange(e) {
-    console.log('here')
     this.props.changeQty(this.props.item, e.target.value)
   }
 
