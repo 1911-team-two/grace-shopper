@@ -1,4 +1,6 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import axios from 'axios'
 import AddressForm from './AddressForm'
 import CheckoutCart from './CheckoutReview'
 
@@ -32,11 +34,15 @@ export class Checkout extends React.Component {
     })
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault()
     let userInfoToBePosted = {
-      // firstName: this.state
+      id: this.props.userId,
+      cart: this.props.cart
     }
+
+    const res = await axios.post('/api/orders', userInfoToBePosted)
+    console.log('res:', res)
   }
 
   render() {
@@ -84,4 +90,9 @@ export class Checkout extends React.Component {
   }
 }
 
-export default Checkout
+const mapStateToProps = state => ({
+  userId: state.user.id,
+  cart: state.cart
+})
+
+export default connect(mapStateToProps)(Checkout)

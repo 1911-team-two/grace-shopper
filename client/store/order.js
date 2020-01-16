@@ -34,14 +34,14 @@ export const fetchOrders = () => {
   }
 }
 
-export const postOrder = () => {
-  return async dispatch => {
-    // try {
-    // } catch (error) {
-    //   dispatch(failedToPostOrder(error))
-    // }
-  }
-}
+// export const postOrder = () => {
+//   return async dispatch => {
+// try {
+// } catch (error) {
+//   dispatch(failedToPostOrder(error))
+// }
+// }
+// }
 
 /** INIT  **/
 const initialState = {
