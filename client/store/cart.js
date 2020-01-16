@@ -22,23 +22,6 @@ export const updateCart = cart => ({
   cart
 })
 
-// export const addToCart = (product, qty = 1) => ({
-//   type: ADD_TO_CART,
-//   product,
-//   qty
-// })
-
-// export const rmFromCart = product => ({
-//   type: REMOVE_FROM_CART,
-//   product
-// })
-
-// export const updateItem = (product, qty) => ({
-//   type: UPDATE_ITEM,
-//   product,
-//   qty
-// })
-
 /** THUNKS **/
 
 export const getCart = () => async dispatch => {
@@ -61,8 +44,8 @@ export const addToCart = item => async dispatch => {
 
 export const rmFromCart = item => async dispatch => {
   try {
-    const {data} = await axios.delete('/api/cart', item.product.id)
-    return dispatch(updateCart(data))
+    const res = await axios.delete(`/api/cart/${item.product.id}`)
+    return dispatch(updateCart(res.data))
   } catch (err) {
     console.log(err)
   }

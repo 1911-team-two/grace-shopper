@@ -10,4 +10,6 @@ export {default as SingleProduct} from './SingleProduct'
 export {default as Checkout} from './Checkout'
 export {default as AddressForm} from './AddressForm'
 export {default as Cart} from './Cart'
+export {default as UserProfile} from './UserProfile'
+
 export {Login, Signup} from './auth-form'
