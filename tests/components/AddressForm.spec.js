@@ -1,11 +1,14 @@
+/* eslint-disable no-unused-expressions */
 /* global describe beforeEach it */
 
 import {expect} from 'chai'
 import React from 'react'
 import {shallow} from 'enzyme'
+import sinon from 'sinon'
 
 import {AddressForm} from '../../client/components/AddressForm'
 import {Checkout} from '../../client/components/Checkout'
+import AddressFormInput from '../../client/components/AddressFormInput'
 
 describe('<AddressForm />', () => {
   let wrapper
@@ -40,29 +43,55 @@ describe('<AddressForm />', () => {
   })
 
   it('renders an input for each piece of information', () => {
-    expect(wrapper.find('input')).to.have.lengthOf(7)
+    expect(wrapper.find(AddressFormInput)).to.have.lengthOf(7)
   })
 
-  it('renders a label for each input', () => {
-    expect(wrapper.find('[htmlFor="firstName"]').text()).to.equal('First Name')
-    expect(wrapper.find('[htmlFor="lastName"]').text()).to.equal('Last Name')
-    expect(wrapper.find('[htmlFor="addressLineTwo"]').text()).to.equal(
-      'Apartment (optional)'
-    )
-    expect(wrapper.find('[htmlFor="city"]').text()).to.equal('City')
-    expect(wrapper.find('[htmlFor="state"]').text()).to.equal('State')
-    expect(wrapper.find('[htmlFor="zip"]').text()).to.equal('Zip Code')
+  describe('<AddressFormInput />', () => {
+    let inputWrapper
+    let input
+
+    beforeEach(() => {
+      let values = {
+        shipping_firstName: '',
+        shipping_lastName: '',
+        shipping_addressLineOne: '',
+        shipping_addressLineTwo: '',
+        shipping_city: '',
+        shipping_state: '',
+        shipping_zip: '',
+        billing_firstName: '',
+        billing_lastName: '',
+        billing_addressLineOne: '',
+        billing_addressLineTwo: '',
+        billing_city: '',
+        billing_state: '',
+        billing_zip: ''
+      }
+
+      // passing in dummy data for this particular input
+      inputWrapper = shallow(
+        <AddressFormInput type="shipping" data="firstName" values={values} />
+      )
+
+      input = inputWrapper.find('input')
+    })
+
+    it('should render one input', () => {
+      expect(inputWrapper.find('input')).to.have.lengthOf(1)
+    })
+
+    it('renders a label with the correct text', () => {
+      expect(inputWrapper.find('label').text()).to.equal('First Name')
+    })
+
+    describe('the input', () => {
+      it('should have the correct name prop', () => {
+        expect(input.prop('name')).to.equal('shipping_firstName')
+      })
+
+      it('should have a value that is initially empty', () => {
+        expect(input.prop('value')).to.equal('')
+      })
+    })
   })
-
-  // really cant figure this out
-  // describe('the input', () => {
-  // it('calls handleChange on change', () => {
-  //   const input = wrapper.find('[name="shipping_firstName"]')
-  //   input.simulate('change')
-
-  //   const mockHandleChange = () => {}
-
-  //   expect(mockHandleChange).toHaveBeenCalled()
-  // })
-  // })
 })
