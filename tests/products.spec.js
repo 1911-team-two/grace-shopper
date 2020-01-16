@@ -48,5 +48,5 @@ describe('Product routes', () => {
       expect(res.body.filter).to.be.an('array')
       expect(res.body.filter[0]).to.be.equal('art')
     })
-  }) // end describe('/api/users')
-}) // end describe('User routes')
+  })
+})
