@@ -1,7 +1,14 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product, Address, Order, Cart} = require('../server/db/models')
+const {
+  User,
+  Product,
+  Address,
+  Order,
+  OrderProduct,
+  Inventory
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -11,12 +18,14 @@ async function seed() {
     {
       email: 'beyonce@gmail.com',
       password: 'password',
-      fullName: 'Beyonce'
+      fullName: 'Beyonce',
+      isAdmin: false
     },
     {
       email: 'dannydevito@gmail.com',
       password: 'iloveham',
-      fullName: 'Danny Devito'
+      fullName: 'Danny Devito',
+      isAdmin: false
     }
   ]
 
@@ -112,9 +121,36 @@ async function seed() {
     }
   ]
 
-  const orders = [{}]
+  const orders = [
+    {
+      status: 'complete'
+    },
+    {
+      status: 'pending'
+    }
+  ]
 
-  const carts = [{}]
+  const orderProducts = [
+    {
+      qty: 1
+    },
+    {
+      qty: 2
+    }
+  ]
+
+  // const inventory = [
+  //   {
+  //     type: 'canvas',
+  //     size: 'S',
+  //     qty: 100
+  //   },
+  //   {
+  //     type: 'canvas',
+  //     size: 'L',
+  //     qty: 100
+  //   }
+  // ]
 
   const realUsers = await Promise.all(
     users.map(user => {
@@ -144,12 +180,19 @@ async function seed() {
   )
   console.log(`seeded ${orders.length} orders`)
 
-  const singleCart = await Promise.all(
-    carts.map(cart => {
-      return Cart.create(cart)
+  const productsInBasket = await Promise.all(
+    orderProducts.map(product => {
+      return OrderProduct.create(product)
     })
   )
-  console.log(`seeded ${carts.length} carts`)
+  console.log(`seeded ${orderProducts.length} products to basket`)
+
+  // const inventoryCheck = await Promise.all(
+  //   inventory.map(item => {
+  //     return Inventory.create(item)
+  //   })
+  // )
+  // console.log(`seeded ${inventory.length} items to inventory`)
 
   // assign addresses to users
   for (const i in allAddresses) {
@@ -161,19 +204,19 @@ async function seed() {
     await realUsers[i].addOrder(allOrders[i])
   }
 
-  // assign a cart to a user
-  for (const i in singleCart) {
-    await realUsers[i].setCart(singleCart[i])
+  // assign orders to orderProduct
+  for (const i in productsInBasket) {
+    await allOrders[i].addOrderProduct(productsInBasket[i])
   }
 
-  // assign product to order
-  for (const i in allProducts) {
-    await allOrders[i].addProduct(allProducts[i])
-  }
+  // assign inventory to orderProduct
+  // for (const i in productsInBasket) {
+  //   await inventoryCheck[i].addOrderProduct(productsInBasket[i])
+  // }
 
-  // assign products to cart
-  for (const i in allProducts) {
-    await singleCart[i].addProduct(allProducts[i])
+  // assign products to orderProduct
+  for (const i in productsInBasket) {
+    await allProducts[i].addOrderProduct(productsInBasket[i])
   }
 
   console.log(`seeded successfully`)
