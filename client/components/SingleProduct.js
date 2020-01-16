@@ -21,13 +21,14 @@ class SingleProduct extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.allProducts !== prevProps.allProducts) {
+      const product = this.props.allProducts.find(
+        prod => prod.id === Number(this.props.match.params.id)
+      )
 
-  componentDidMount() {
-    const product = this.props.allProducts.find(
-      prod => prod.id === Number(this.props.match.params.id)
-    )
-
-    if (product) this.setState({product})
+      this.setState({product})
+    }
   }
 
   handleSubmit(event) {
@@ -52,7 +53,6 @@ class SingleProduct extends React.Component {
           <p id="product-description">{product.description}</p>
 
           <form onSubmit={this.handleSubmit}>
-
             {/* <div className="radio-group">
               <label htmlFor="size">Size</label>
               <div>
