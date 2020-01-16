@@ -40,11 +40,75 @@ async function seed() {
   const products = [
     {
       imageUrl:
-        'https://ctl.s6img.com/society6/img/-Df-I9ypq_VVCaZngqRxZiJthgQ/w_700/prints/~artwork/s6-original-art-uploads/society6/uploads/misc/133a3e56f0e34a80b6c2130f394c9f72/~~/bold-and-brash1563343-prints.jpg?wait=0&attempt=0',
-      name: 'The Squidward',
+        'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain',
+      name: 'Llama Family',
       price: 1899,
       description:
-        'Natural white, matte, ultra smooth background. 100% cotton, acid and lignin-free archival paper. Custom trimmed with border for framing; 1" for x-small and small, 2" for all larger sizes. Every order is custom made just for you'
+        'Taken by photographer Victoria Aguiree while hiking through the Andes Mountains, this adorable black + white print of a family of llamas reflects each of their vibrant personalities. Printed on archival paper made from cotton pressed in Italian mills, this high-quality art print is available in sizes and frames just right for your space. First select your frame (or go frameless), then select your size.'
+    },
+    {
+      imageUrl:
+        'https://s7d5.scene7.com/is/image/UrbanOutfitters/53824355_014_b?$xlarge$&hei=900&qlt=80&fit=constrain',
+      name: 'Jungle Vacay',
+      price: 1899,
+      description:
+        'Dream of getaways to the jungle with this lush art print by 83 Oranges. Printed on archival paper made from cotton pressed in Italian mills, this high-quality art print is available in sizes and frames just right for your space. First select your frame (or go frameless), then select your size.'
+    },
+    {
+      imageUrl:
+        'https://s7d5.scene7.com/is/image/UrbanOutfitters/45802725_014_b?$xlarge$&hei=900&qlt=80&fit=constrain',
+      name: 'Sea Bliss',
+      price: 1899,
+      description:
+        'Shot with a drone off the coast of northern Portugal, this seascape is by English photographer Ingrid Beddoes, whose work celebrates travel, the sea + a love of all things simple. Printed on archival paper made from cotton pressed in Italian mills, this high-quality art print is available in sizes and frames just right for your space. First select your frame (or go frameless), then select your size.'
+    },
+    {
+      imageUrl:
+        'https://s7d5.scene7.com/is/image/UrbanOutfitters/49955818_017_b?$xlarge$&hei=900&qlt=80&fit=constrain',
+      name: 'Sun and Moon',
+      price: 1899,
+      description:
+        'UO-exclusive art print by Nadja depicting a tarot-inspired sun + moon drawing. Printed on archival paper made from cotton pressed in Italian mills, this high-quality art print is available in sizes and frames just right for your space. First select your frame (or go frameless), then select your size.'
+    },
+    {
+      imageUrl:
+        'https://s7d5.scene7.com/is/image/UrbanOutfitters/41089186_003_b?$xlarge$&hei=900&qlt=80&fit=constrain',
+      name: 'Holy Night',
+      price: 1899,
+      description:
+        'UO-exclusive print from Fran Rodriguez, who is inspired by psychedelics and surrealism. Printed on archival paper made from cotton pressed in Italian mills, this high-quality art print is available in sizes and frames just right for your space. First select your frame (or go frameless), then select your size.'
+    },
+    {
+      imageUrl:
+        'https://s7d5.scene7.com/is/image/UrbanOutfitters/45118072_010_b?$xlarge$&hei=900&qlt=80&fit=constrain',
+      name: 'Crash Into Me',
+      price: 1899,
+      description:
+        'Born in the Pacific Northwest, photographer Leah Flores seeks out mountains, forests + other forms of nature to include in her works - Crash Into Me being an invitation to explore the ocean. Printed on archival paper made from cotton pressed in Italian mills, this bold graphic art is available in sizes and frames just right for your space. First select your frame (or go frameless), then select your size.'
+    },
+    {
+      imageUrl:
+        'https://s7d5.scene7.com/is/image/UrbanOutfitters/55531511_014_b?$xlarge$&hei=900&qlt=80&fit=constrain',
+      name: 'Oranges Snow and Gold Pine',
+      price: 1899,
+      description:
+        'Bring the mountains into your space with this art print by 83 Oranges, capturing a road through majestic peaks. Printed on archival paper made from cotton pressed in Italian mills, this high-quality art print is available in sizes and frames just right for your space. First select your frame (or go frameless), then select your size.'
+    },
+    {
+      imageUrl:
+        'https://s7d5.scene7.com/is/image/UrbanOutfitters/55531511_014_b?$xlarge$&hei=900&qlt=80&fit=constrain',
+      name: 'Leopard Block Party',
+      price: 1899,
+      description:
+        'Leopards in the house with this art print by Megan Galante, sure to bring out the wild side in your space. Printed on archival paper made from cotton pressed in Italian mills, this high-quality art print is available in sizes and frames just right for your space. First select your frame (or go frameless), then select your size.'
+    },
+    {
+      imageUrl:
+        'https://s7d5.scene7.com/is/image/UrbanOutfitters/54051578_014_b?$xlarge$&hei=900&qlt=80&fit=constrain',
+      name: 'Terracotta',
+      price: 1899,
+      description:
+        'Leopards in the house with this art print by Megan Galante, sure to bring out the wild side in your space. Printed on archival paper made from cotton pressed in Italian mills, this high-quality art print is available in sizes and frames just right for your space. First select your frame (or go frameless), then select your size.'
     }
   ]
 
