@@ -25,7 +25,7 @@ export const submittedOrder = order => ({type: SUBMITTED_ORDER, order})
 export const fetchOrders = () => {
   return async dispatch => {
     try {
-      const res = await axios.get('/api/order')
+      const res = await axios.get('/api/orders')
       const action = gotOrders(res.data)
       dispatch(action)
     } catch (err) {
