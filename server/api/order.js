@@ -30,3 +30,28 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  try {
+    const newOrder = await Order.create({
+      status: 'complete'
+    })
+
+    await newOrder.setUser(req.body.id)
+
+    const itemsInCart = req.body.cart
+
+    itemsInCart.map(async item => {
+      const newOrderProduct = await OrderProduct.create({
+        qty: item.qty
+      })
+
+      await newOrderProduct.setProduct(item.product.id)
+      await newOrderProduct.setOrder(newOrder)
+    })
+
+    res.send(newOrder)
+  } catch (err) {
+    next(err)
+  }
+})
