@@ -21,12 +21,14 @@ class SingleProduct extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
-    const product = this.props.allProducts.find(
-      prod => prod.id === Number(this.props.match.params.id)
-    )
+  componentDidUpdate(prevProps) {
+    if (this.props.allProducts !== prevProps.allProducts) {
+      const product = this.props.allProducts.find(
+        prod => prod.id === Number(this.props.match.params.id)
+      )
 
-    if (product) this.setState({product})
+      this.setState({product})
+    }
   }
 
   handleSubmit(event) {
