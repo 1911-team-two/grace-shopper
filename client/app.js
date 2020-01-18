@@ -6,7 +6,8 @@ import Routes from './routes'
 import {getProducts} from './store/products'
 
 class App extends React.Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props)
     this.props.getProducts()
   }
 
