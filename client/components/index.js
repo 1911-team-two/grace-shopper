@@ -11,5 +11,6 @@ export {default as Checkout} from './Checkout'
 export {default as AddressForm} from './AddressForm'
 export {default as Cart} from './Cart'
 export {default as UserProfile} from './UserProfile'
+export {default as OrderProfile} from './SingleOrder'
 
 export {Login, Signup} from './auth-form'
