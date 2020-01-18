@@ -19,9 +19,8 @@ class Cart extends Component {
         ) : (
           <ul>
             {itemsInCart.map(cartItem => {
-              console.log(cartItem)
               return (
-                <li key={cartItem.id}>
+                <li key={cartItem.product.id}>
                   <CartItem item={cartItem} />
                 </li>
               )
