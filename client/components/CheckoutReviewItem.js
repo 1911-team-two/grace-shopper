@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import CartItem from './cartitem'
+import CartItem from './CartItem'
 
 export default class CheckoutReviewItem extends Component {
   render() {

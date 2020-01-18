@@ -4,12 +4,12 @@ import {AddressForm} from './AddressForm'
  * This way, we can import all of our components from the same place, rather than
  * having to figure out which file they belong to!
  */
-export {default as Navbar} from './navbar'
-export {default as Home} from './home'
+export {default as Navbar} from './Navbar'
+export {default as Home} from './Home'
 export {default as SingleProduct} from './SingleProduct'
 export {default as Checkout} from './Checkout'
 export {default as AddressForm} from './AddressForm'
-export {default as Cart} from './cart'
+export {default as Cart} from './Cart'
 export {default as UserProfile} from './UserProfile'
 
-export {Login, Signup} from './auth-form'
+export {Login, Signup} from './AuthForm'
