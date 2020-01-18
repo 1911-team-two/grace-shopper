@@ -2,8 +2,8 @@
 
 const {expect} = require('chai')
 const request = require('supertest')
-const db = require('../../../server/db')
-const app = require('../../../server/index')
+const db = require('../../server/db')
+const app = require('../../server/index')
 const Product = db.model('product')
 
 describe('Product routes', () => {
@@ -15,10 +15,8 @@ describe('Product routes', () => {
     beforeEach(() => {
       return Product.create({
         name: 'Tote',
-        price: 23.5,
-        description: 'The art on this bag is by Picaso',
-        category: 'bags',
-        filter: ['art']
+        price: 23,
+        description: 'The art on this bag is by Picaso'
       })
     })
 
@@ -38,13 +36,26 @@ describe('Product routes', () => {
 
       expect(res.body).to.be.an('object')
       expect(res.body.name).to.be.equal('Tote')
-      expect(res.body.price).to.be.equal(23.5)
+      expect(res.body.price).to.be.equal(23)
       expect(res.body.description).to.be.equal(
         'The art on this bag is by Picaso'
       )
-      expect(res.body.category).to.be.equal('bags')
-      expect(res.body.filter).to.be.an('array')
-      expect(res.body.filter[0]).to.be.equal('art')
     })
-  }) // end describe('/api/users')
-}) // end describe('User routes')
+
+    it('POST /api/products/', async () => {
+      const res = await request(app)
+        .post('/api/products/')
+        .send({
+          name: 'Pine leaves',
+          price: 17,
+          description: 'Beautiful printed leaves'
+        })
+        .expect(201)
+
+      expect(res.body).to.be.an('object')
+      expect(res.body.name).to.be.equal('Pine leaves')
+      expect(res.body.price).to.be.equal(17)
+      expect(res.body.description).to.be.equal('Beautiful printed leaves')
+    })
+  })
+})
