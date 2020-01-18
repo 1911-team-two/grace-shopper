@@ -2,7 +2,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getCart} from '../store/cart'
-import CheckoutReviewItem from './CheckoutReviewItem'
 import CartItem from './CartItem'
 
 export class CheckoutReview extends React.Component {
