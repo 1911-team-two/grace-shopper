@@ -36,8 +36,7 @@ describe('db Models', () => {
     }) // end describe('instanceMethods')
 
     describe('Attributes', () => {
-      let user;
-
+      let user
 
       beforeEach(async () => {
         user = await User.create({
@@ -45,7 +44,6 @@ describe('db Models', () => {
           password: 'doggies',
           isAdmin: true
         })
-
       })
 
       // afterEach(function(){
@@ -70,28 +68,30 @@ describe('db Models', () => {
         )
       })
     })
-  })// end describe('User model')
+  }) // end describe('User model')
   describe('Product model', () => {
     beforeEach(() => {
       return db.sync({force: true})
     })
 
     describe('Attributes', () => {
-      let product;
+      let product
 
       beforeEach(async () => {
         product = await Product.create({
-          imageUrl: 'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain',
+          imageUrl:
+            'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain',
           name: 'doggies',
           price: 1899,
           description: 'its cute :)'
         })
-
       })
 
       it('includes `imageUrl`, `name`, `price` and `description` fields', () => {
         return product.save().then(savedProduct => {
-          expect(savedProduct.imageUrl).to.equal('https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain')
+          expect(savedProduct.imageUrl).to.equal(
+            'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain'
+          )
           expect(savedProduct.name).to.equal('doggies')
           expect(savedProduct.price).to.equal(1899)
           expect(savedProduct.description).to.equal('its cute :)')
@@ -135,7 +135,7 @@ describe('db Models', () => {
     })
 
     describe('Attributes', () => {
-      let addressBook;
+      let addressBook
 
       beforeEach(async () => {
         addressBook = await Address.create({
@@ -152,8 +152,8 @@ describe('db Models', () => {
           expect(savedAddress.address1).to.equal('20 Laurel Road')
           expect(savedAddress.address2).to.equal(null)
           expect(savedAddress.city).to.equal('Pound Ridge'),
-          expect(savedAddress.state).to.equal('NY'),
-          expect(savedAddress.zip).to.equal(10576)
+            expect(savedAddress.state).to.equal('NY'),
+            expect(savedAddress.zip).to.equal(10576)
         })
       })
     })
@@ -164,13 +164,12 @@ describe('db Models', () => {
     })
 
     describe('Attributes', () => {
-      let order;
+      let order
 
       beforeEach(async () => {
         order = await Order.create({
           status: 'pending'
         })
-
       })
 
       it('includes a `status` field', () => {
@@ -186,13 +185,12 @@ describe('db Models', () => {
     })
 
     describe('Attributes', () => {
-      let orderProduct;
+      let orderProduct
 
       beforeEach(async () => {
         orderProduct = await OrderProducts.create({
           qty: 2
         })
-
       })
 
       it('includes a `qty` field', () => {
@@ -202,4 +200,4 @@ describe('db Models', () => {
       })
     })
   })
-});
+})
