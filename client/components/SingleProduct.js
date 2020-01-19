@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {getProducts} from '../store/products'
 import {addToCart} from '../store/cart'
 
-class SingleProduct extends React.Component {
+export class SingleProduct extends React.Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
