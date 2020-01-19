@@ -25,7 +25,7 @@ describe('db Models', () => {
           })
         })
 
-        it.only('returns true if the password is correct', () => {
+        it('returns true if the password is correct', () => {
           expect(cody.correctPassword('bones')).to.be.equal(true)
         })
 
