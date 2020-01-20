@@ -24,6 +24,11 @@
     "mocha": "NODE_ENV='test' mocha \"./tests/*.spec.js\" --watch --require @babel/polyfill --require @babel/register",
     "mocha:unit": "NODE_ENV='test' mocha --watch --require @babel/polyfill --require @babel/register --require ./tests/setup/setupEnzyme.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "*.{js,jsx}": [
       "prettier --write",
