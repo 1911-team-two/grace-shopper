@@ -1,34 +1,13 @@
 import React from 'react'
-import axios from 'axios'
 import {connect} from 'react-redux'
 
 import {getProducts} from '../store/products'
 import {addToCart} from '../store/cart'
 
-class SingleProduct extends React.Component {
+export class SingleProduct extends React.Component {
   constructor(props) {
     super(props)
-    // Initialize empty product to avoid undefined issues on render
-    this.state = {
-      product: {
-        name: '',
-        imageUrl: '',
-        price: 0,
-        description: ''
-      }
-    }
-
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.allProducts !== prevProps.allProducts) {
-      const product = this.props.allProducts.find(
-        prod => prod.id === Number(this.props.match.params.id)
-      )
-
-      this.setState({product})
-    }
   }
 
   handleSubmit(event) {
@@ -37,11 +16,11 @@ class SingleProduct extends React.Component {
     // const size = event.target.size.value
 
     // await axios.post('/api/cart/', this.state.product, quantity)
-    this.props.addToCart(this.state.product, quantity)
+    this.props.addToCart(this.props.product, quantity)
   }
 
   render() {
-    const product = this.state.product
+    const product = this.props.product
     return (
       <div>
         <div id="product-main">
@@ -86,9 +65,15 @@ class SingleProduct extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  allProducts: state.products
-})
+const mapStateToProps = (state, ownProps) => {
+  const id = Number(ownProps.match.params.id)
+  return {
+    product:
+      state.products.find(product => {
+        return product.id === id
+      }) || {}
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
   getProducts: () => dispatch(getProducts()),

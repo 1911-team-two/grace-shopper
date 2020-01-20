@@ -1,16 +1,10 @@
-import thunkMiddleware from 'redux-thunk'
-import {composeWithDevTools} from 'redux-devtools-extension'
-import {createStore, applyMiddleware} from 'redux'
-
 const expect = require('chai').expect
 
 import cartReducer, {
-  ADD_TO_CART,
-  REMOVE_FROM_CART,
-  UPDATE_ITEM,
-  addToCart,
-  rmFromCart,
-  updateItem
+  GET_CART,
+  UPDATE_CART,
+  gotCart,
+  updateCart
 } from '../client/store/cart'
 
 import productReducer, {
@@ -24,122 +18,49 @@ import productReducer, {
 const products = [{id: 1, hello: 'hello'}, {id: 2, bye: 'hello'}, {id: 3}]
 
 describe('cart', () => {
-  describe('actions', () => {
-    it('should create an action to add to cart', () => {
-      const expectedAction = {
-        type: ADD_TO_CART,
-        product: products[0],
-        qty: 1
-      }
-      const expectedAction2 = {
-        type: ADD_TO_CART,
-        product: products[2],
-        qty: 50
-      }
-      expect(addToCart(products[0])).to.deep.equal(expectedAction)
-      expect(addToCart(products[2], 50)).to.deep.equal(expectedAction2)
+  let cart = [
+    {product: products[0], qty: 1},
+    {product: products[1], qty: 100}
+  ]
+
+  describe('action creators', () => {
+    it('gotCart should create correct action', () => {
+      expect(gotCart(cart)).to.deep.equal({type: GET_CART, cart})
     })
 
-    it('should create an action to remove from cart', () => {
-      const expectedAction = {
-        type: REMOVE_FROM_CART,
-        product: products[0]
-      }
-      const expectedAction2 = {
-        type: REMOVE_FROM_CART,
-        product: products[2]
-      }
-      expect(rmFromCart(products[0])).to.deep.equal(expectedAction)
-      expect(rmFromCart(products[2])).to.deep.equal(expectedAction2)
-    })
-
-    it('should create an action to update item', () => {
-      const expectedAction = {type: UPDATE_ITEM, product: products[1], qty: 30}
-      const expectedAction2 = {type: UPDATE_ITEM, product: products[2], qty: 1}
-      expect(updateItem(products[1], 30)).to.deep.equal(expectedAction)
-      expect(updateItem(products[2], 1)).to.deep.equal(expectedAction2)
+    it('updateCart should create correct action', () => {
+      expect(updateCart(cart)).to.deep.equal({type: UPDATE_CART, cart})
     })
   })
+})
 
-  describe('reducers', () => {
-    const emptyCart = []
-    const nonEmptyCart = [
+describe('reducers', () => {
+  const emptyCart = []
+  const nonEmptyCart = [
+    {product: products[0], qty: 1},
+    {product: products[1], qty: 100}
+  ]
+
+  it('should return initial state', () => {
+    expect(cartReducer(undefined, {}), emptyCart)
+  })
+
+  it('should update the state correctly for UPDATE_CART action', () => {
+    const action = {type: UPDATE_CART, cart: nonEmptyCart}
+    const expected = [
       {product: products[0], qty: 1},
       {product: products[1], qty: 100}
     ]
+    expect(cartReducer(emptyCart, action)).to.deep.equal(expected)
+  })
 
-    it('should return initial state', () => {
-      expect(cartReducer(undefined, {}), [])
-    })
-
-    describe('ADD_TO_CART', () => {
-      it('should add to empty cart', () => {
-        expect(
-          cartReducer(emptyCart, addToCart(products[1], 1))
-        ).to.deep.equal([{product: products[1], qty: 1}])
-        expect(
-          cartReducer(emptyCart, addToCart(products[0], 20))
-        ).to.deep.equal([{product: products[0], qty: 20}])
-        expect(cartReducer(emptyCart, addToCart(products[2]))).to.deep.equal([
-          {product: products[2], qty: 1}
-        ])
-      })
-
-      it('should add to non-empty cart', () => {
-        let expectedCart = [...nonEmptyCart, {product: products[2], qty: 2}]
-        let actualCart = cartReducer(nonEmptyCart, addToCart(products[2], 2))
-        expect(actualCart).to.deep.equal(expectedCart)
-        expectedCart.push({product: products[1], qty: 1000})
-        actualCart = cartReducer(actualCart, addToCart(products[1], 100))
-      })
-
-      it('should not duplicate items', () => {
-        let expectedCart = [{product: products[0], qty: 2}, nonEmptyCart[1]]
-        let actualCart = cartReducer(nonEmptyCart, addToCart(products[0]))
-        expect(actualCart).to.deep.equal(expectedCart)
-        expectedCart = [nonEmptyCart[0], {product: products[1], qty: 120}]
-        actualCart = cartReducer(nonEmptyCart, addToCart(products[1], 20))
-      })
-    })
-
-    describe('REMOVE_FROM_CART', () => {
-      it('should remove an item by id if it is in the cart', () => {
-        let expectedCart = [nonEmptyCart[1]]
-        let actualCart = cartReducer(
-          nonEmptyCart,
-          rmFromCart(nonEmptyCart[0].product)
-        )
-        expect(actualCart).to.deep.equal(expectedCart)
-        expectedCart = []
-        actualCart = cartReducer(actualCart, rmFromCart(products[1]))
-        expect(actualCart).to.deep.equal(expectedCart)
-      })
-
-      it('should not remove an item if it is not in the cart', () => {
-        let expectedCart = [nonEmptyCart[0]]
-        let actualCart = cartReducer([nonEmptyCart[0]], rmFromCart(products[1]))
-        expect(actualCart).to.deep.equal(expectedCart)
-        expectedCart = []
-        actualCart = cartReducer([], rmFromCart(products[1]))
-        expect(actualCart).to.deep.equal(expectedCart)
-      })
-    })
-
-    describe('UPDATE_ITEM', () => {
-      it('should update an item in the cart', () => {
-        let expectedCart = [nonEmptyCart[0], {product: products[1], qty: 30}]
-        let actualCart = cartReducer(nonEmptyCart, updateItem(products[1], 30))
-        expect(actualCart).to.deep.equal(expectedCart)
-        expectedCart = [{product: products[1], qty: 20}, expectedCart[1]]
-        actualCart = cartReducer(actualCart, updateItem(products[1], 20))
-      })
-
-      it('should not update an item not in the cart', () => {
-        let expectedCart = nonEmptyCart
-        let actualCart = cartReducer(nonEmptyCart, updateItem(products[2], 0))
-        expect(actualCart).to.deep.equal(expectedCart)
-      })
-    })
+  it('should update the state correctly for GET_CART action', () => {
+    const action = {type: GET_CART, cart: nonEmptyCart}
+    const expected = [
+      {product: products[0], qty: 1},
+      {product: products[1], qty: 100}
+    ]
+    expect(cartReducer(emptyCart, action)).to.deep.equal(expected)
   })
 })
 

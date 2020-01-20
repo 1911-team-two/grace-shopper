@@ -17,7 +17,10 @@ User.hasMany(Address)
 User.hasMany(Order)
 Order.belongsTo(User)
 
-Order.hasMany(OrderProduct)
+Order.hasMany(OrderProduct, {
+  onDelete: 'cascade',
+  hooks: true
+})
 OrderProduct.belongsTo(Order)
 
 Product.hasMany(OrderProduct)
