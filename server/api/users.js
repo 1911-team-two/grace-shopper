@@ -34,10 +34,12 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
+//No router.post because it is being handled by signup
+
 router.put('/:userId', async (req, res, next) => {
   try {
     const userId = req.params.userId
-    if (req.user) {
+    if (req.user && (req.user.isAdmin || req.user.id === userId)) {
       const user = await User.findByPk(userId)
       await user.update(req.body)
       res.send(user)
@@ -52,8 +54,8 @@ router.put('/:userId', async (req, res, next) => {
 router.delete('/:userId', async (req, res, next) => {
   try {
     const userId = req.params.userId
-    if (req.user) {
-      let user = User.findByPk(userId)
+    if (req.user && (req.user.isAdmin || req.user.id === userId)) {
+      let user = await User.findByPk(userId)
       await user.destroy()
       res.sendStatus(204)
     } else {

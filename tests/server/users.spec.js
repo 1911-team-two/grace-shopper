@@ -29,7 +29,7 @@ describe('User routes', () => {
       })
     })
 
-    it('GET /api/users', async () => {
+    describe('GET /api/users', () => {
       it('should return unauthorized for users except admins', async () => {
         await request(app)
           .get('/api/users')
@@ -40,34 +40,76 @@ describe('User routes', () => {
         await createAuthenticatedRequest(
           app,
           {
-            email: 'bob@gmail.com',
-            password: 'meh'
+            email: 'jane@gmail.com',
+            password: 'toolazytosetapassword'
           },
-          async function(request) {
-            let res = await request.get('/api/users').expect(201)
+          async function(authenticatedRequest) {
+            await authenticatedRequest.get('/api/users').expect(200)
           }
         )
       })
+    })
 
-      it('GET /api/users/:userId', async () => {
-        it('should return unauthorized for a logged in user except admin', async () => {
-          await request(app)
-            .get('/api/users/1')
-            .expect(401)
-        })
+    describe('GET /api/users/userId', () => {
+      it('should return unauthorized for a logged in user except admin', async () => {
+        await request(app)
+          .get('/api/users/1')
+          .expect(401)
+      })
 
-        it('should get successfully for admins', async () => {
-          await createAuthenticatedRequest(
-            app,
-            {
-              email: 'jane@gmail.com',
-              password: 'toolazytosetapassword'
-            },
-            async function(request) {
-              let res = await request.get('/api/users/:userId').expect(201)
-            }
-          )
-        })
+      it('should get successfully for admins', async () => {
+        await createAuthenticatedRequest(
+          app,
+          {
+            email: 'jane@gmail.com',
+            password: 'toolazytosetapassword'
+          },
+          async function(authenticatedRequest) {
+            await authenticatedRequest.get('/api/users/2').expect(200)
+          }
+        )
+      })
+    })
+
+    describe('PUT /api/users/:userId', () => {
+      it('should return unauthorized for users except admins', async () => {
+        await request(app)
+          .put('/api/users/1')
+          .expect(401)
+      })
+
+      it('admins should be able to update /api/users', async () => {
+        await createAuthenticatedRequest(
+          app,
+          {
+            email: 'jane@gmail.com',
+            password: 'toolazytosetapassword'
+          },
+          async function(authenticatedRequest) {
+            await authenticatedRequest.put('/api/users/1').expect(200)
+          }
+        )
+      })
+    })
+
+    describe('DELETE /api/users/:userId', () => {
+      it('should return unauthorized guests', async () => {
+        await request(app)
+          .delete('/api/users/1')
+          .expect(401)
+      })
+
+      it('should return unauthorized for logged in users that are not admins', async () => {
+        await createAuthenticatedRequest(
+          app,
+          {
+            email: 'bob@gmail.com',
+            password: 'meh'
+          },
+          async function(authenticatedRequest) {
+            await authenticatedRequest.delete('/api/users/1').expect(401)
+          }
+        )
       })
     })
   })
