@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import AllProducts from './AllProducts'
 
@@ -8,7 +9,7 @@ export class Home extends React.Component {
   render() {
     return (
       <div>
-        <h2>All products</h2>
+        <Header>All products</Header>
         <AllProducts />
       </div>
     )
@@ -16,3 +17,9 @@ export class Home extends React.Component {
 }
 
 export default Home
+
+const Header = styled.h2`
+  font-size: 2rem;
+  color: pink;
+  font-weight: 300;
+`
