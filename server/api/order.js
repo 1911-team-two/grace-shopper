@@ -52,26 +52,24 @@ router.get('/:orderId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    const newOrder = await Order.create({
+      status: 'complete'
+    })
     if (req.user) {
-      const newOrder = await Order.create({
-        status: 'complete'
-      })
       await newOrder.setUser(req.user.id)
-      const itemsInCart = req.body.cart
-
-      itemsInCart.forEach(async item => {
-        const newOrderProduct = await OrderProduct.create({
-          qty: item.qty
-        })
-
-        await newOrderProduct.setProduct(item.product.id)
-        await newOrderProduct.setOrder(newOrder)
+    }
+    const itemsInCart = req.body.cart
+    console.log(itemsInCart)
+    itemsInCart.forEach(async item => {
+      const newOrderProduct = await OrderProduct.create({
+        qty: item.qty
       })
 
-      res.send(newOrder)
-    } else {
-      res.sendStatus(404)
-    }
+      await newOrderProduct.setProduct(item.product.id)
+      await newOrderProduct.setOrder(newOrder)
+    })
+    res.status(201)
+    res.send(newOrder)
   } catch (err) {
     next(err)
   }

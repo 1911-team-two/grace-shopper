@@ -22,9 +22,9 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:userId', async (req, res, next) => {
   try {
-    if (req.user && req.user.isAdmin) {
-      const id = req.params.userId
-      const user = await User.findByPk(id)
+    const userId = req.params.userId
+    if (req.user && (req.user.isAdmin || req.user.id === userId)) {
+      const user = await User.findByPk(userId)
       res.send(user)
     } else {
       res.sendStatus(401)

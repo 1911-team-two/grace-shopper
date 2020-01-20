@@ -50,7 +50,7 @@ describe('User routes', () => {
       })
     })
 
-    describe('GET /api/users/userId', () => {
+    describe('GET /api/users/:userId', () => {
       it('should return unauthorized for a logged in user except admin', async () => {
         await request(app)
           .get('/api/users/1')
@@ -78,7 +78,7 @@ describe('User routes', () => {
           .expect(401)
       })
 
-      it('admins should be able to update /api/users', async () => {
+      it('should get successfully for admins', async () => {
         await createAuthenticatedRequest(
           app,
           {
