@@ -59,7 +59,7 @@ const createApp = () => {
   app.use(
     session({
       secret: process.env.SESSION_SECRET || 'my best friend is Cody',
-      store: sessionStore,
+      store: process.env.NODE_ENV === 'test' ? null : sessionStore,
       resave: false,
       saveUninitialized: false
     })

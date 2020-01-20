@@ -1,17 +1,18 @@
 import React from 'react'
 import {expect} from 'chai'
-import enzyme, {mount, shallow} from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+import {shallow} from 'enzyme'
 
-import SingleProduct from '../../client/components/SingleProduct'
-
-enzyme.configure({
-  adapter: new Adapter()
-})
+import {SingleProduct} from '../../client/components/SingleProduct'
 
 describe('<SingleProduct/>', () => {
+  let wrapper
+
+  beforeEach('set up wrapper', () => {
+    let exampleProduct = {name: 'This is a name of a product'}
+    wrapper = shallow(<SingleProduct product={exampleProduct} />)
+  })
+
   it('should render an h2', () => {
-    const wrapper = shallow(<SingleProduct />)
-    expect(wrapper.find('h2').text()).to.equal('Single Product Name')
+    expect(wrapper.find('h2').text()).to.equal('This is a name of a product')
   })
 })

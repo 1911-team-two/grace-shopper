@@ -9,8 +9,7 @@ import {Checkout} from '../../client/components/Checkout'
 import {AddressForm} from '../../client/components/AddressForm'
 import AddressFormInput from '../../client/components/AddressFormInput'
 import {CheckoutReview} from '../../client/components/CheckoutReview'
-import CartItem from '../../client/components/cartitem'
-import {Cart} from '../../client/components/index'
+import CartItem from '../../client/components/CartItem'
 
 describe('<Checkout />', () => {
   let wrapper

@@ -9,10 +9,6 @@ const defaultCart = []
 export const GET_CART = 'GET_CART'
 export const UPDATE_CART = 'UPDATE_CART'
 
-export const ADD_TO_CART = 'ADD_TO_CART'
-export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
-export const UPDATE_ITEM = 'UPDATE_ITEM'
-
 /** ACTION CREATORS **/
 
 export const gotCart = cart => ({type: GET_CART, cart})
@@ -36,7 +32,8 @@ export const getCart = () => async dispatch => {
 export const addToCart = item => async dispatch => {
   try {
     const {data} = await axios.post('/api/cart', item)
-    return dispatch(updateCart(data))
+    const action = updateCart(data)
+    return dispatch(action)
   } catch (err) {
     console.log(err)
   }

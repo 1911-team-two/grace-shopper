@@ -39,7 +39,7 @@ export const fetchOrders = () => {
 export const fetchSingleOrder = id => {
   return async dispatch => {
     try {
-      const res = await axios.get(`/api/order/${id}`)
+      const res = await axios.get(`/api/orders/${id}`)
       const action = gotSingleOrder(res.data)
       dispatch(action)
     } catch (error) {
