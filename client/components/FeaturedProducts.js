@@ -1,14 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import styled from 'styled-components'
-import Slider from 'react-slick'
+
 import Thumbnail from './Thumbnail'
 
-export class AllProducts extends React.Component {
+export class FeaturedProducts extends React.Component {
   render() {
     return (
       <Wrapper className="allProducts">
-        {this.props.allProducts.map(product => {
+        {this.props.allProducts.splice(0, 4).map(product => {
           return <Thumbnail product={product} key={product.id} />
         })}
       </Wrapper>
@@ -20,12 +20,9 @@ const mapStateToProps = state => ({
   allProducts: state.products
 })
 
-export default connect(mapStateToProps)(AllProducts)
+export default connect(mapStateToProps)(FeaturedProducts)
 
 const Wrapper = styled.div`
-  /* display: flex;
+  display: flex;
   overflow-x: auto;
-  margin: 0 -4vw 0 0; */
-  /* width: 25000px;
-  transform: translate3d(-3156px, 0px, 0px); */
 `

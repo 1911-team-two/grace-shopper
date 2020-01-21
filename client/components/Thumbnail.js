@@ -6,8 +6,8 @@ const Thumbnail = props => {
   const product = props.product
   return (
     <Wrapper>
+      <Image src={product.imageUrl[0]} alt={product.name} />
       <Link to={`/product/${product.id}`}>
-        <img src={product.imageUrl[0]} alt={product.name} />
         <p>{product.name}</p>
         <p>${product.price / 100}</p>
       </Link>
@@ -17,12 +17,8 @@ const Thumbnail = props => {
 
 export default Thumbnail
 
-const Wrapper = styled.div`
-  padding-right: 30px;
-`
+const Wrapper = styled.div``
 
-const Image = styled.div`
-  background-image: url(${props => props.src});
-  min-height: 30vw;
-  min-width: 30vw;
+const Image = styled.img`
+  max-height: 60vh;
 `

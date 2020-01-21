@@ -10,10 +10,10 @@ export class Home extends React.Component {
   render() {
     return (
       <div>
-        <Header>Featured products</Header>
+        <Header>Back in Stock</Header>
         <FeaturedProducts />
         <Header>All products</Header>
-        {/* <AllProducts /> */}
+        <AllProducts />
       </div>
     )
   }
