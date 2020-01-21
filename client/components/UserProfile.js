@@ -21,11 +21,15 @@ class UserProfile extends Component {
 
         <ul>
           {orders.map(order => {
+            let date = new Date(order.updatedAt)
             return (
               <li key={order.id}>
                 <h3>Order {order.id}</h3>
-                <h4>Date: {order.updatedAt}</h4>
-                <h5>Click here to view more details</h5>
+                <h4>Date: {date.toLocaleDateString('en-US')}</h4>
+                <a href={`/profile/${order.id}`}>
+                  Click here to view more details
+                </a>
+                <br></br>
                 <img src={order.orderProducts[0].product.imageUrl} />
 
                 {/* {order.orderProducts.map(item => {
