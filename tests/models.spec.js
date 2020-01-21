@@ -79,8 +79,9 @@ describe('db Models', () => {
 
       beforeEach(async () => {
         product = await Product.create({
-          imageUrl:
-            'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain',
+          imageUrl: [
+            'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain'
+          ],
           name: 'doggies',
           price: 1899,
           description: 'its cute :)'
@@ -89,9 +90,9 @@ describe('db Models', () => {
 
       it('includes `imageUrl`, `name`, `price` and `description` fields', () => {
         return product.save().then(savedProduct => {
-          expect(savedProduct.imageUrl).to.equal(
+          expect(savedProduct.imageUrl).to.equal([
             'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain'
-          )
+          ])
           expect(savedProduct.name).to.equal('doggies')
           expect(savedProduct.price).to.equal(1899)
           expect(savedProduct.description).to.equal('its cute :)')
@@ -151,9 +152,9 @@ describe('db Models', () => {
         return addressBook.save().then(savedAddress => {
           expect(savedAddress.address1).to.equal('20 Laurel Road')
           expect(savedAddress.address2).to.equal(null)
-          expect(savedAddress.city).to.equal('Pound Ridge'),
-            expect(savedAddress.state).to.equal('NY'),
-            expect(savedAddress.zip).to.equal(10576)
+          expect(savedAddress.city).to.equal('Pound Ridge')
+          expect(savedAddress.state).to.equal('NY')
+          expect(savedAddress.zip).to.equal(10576)
         })
       })
     })
