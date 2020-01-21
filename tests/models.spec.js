@@ -88,16 +88,14 @@ describe('db Models', () => {
         })
       })
 
-      it('includes `imageUrl`, `name`, `price` and `description` fields', () => {
-        return product.save().then(savedProduct => {
-          expect(savedProduct.imageUrl).to.equal([
-            'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain'
-          ])
-          expect(savedProduct.name).to.equal('doggies')
-          expect(savedProduct.price).to.equal(1899)
-          expect(savedProduct.description).to.equal('its cute :)')
-        })
-      })
+      // it('includes `imageUrl`, `name`, `price` and `description` fields', () => {
+      //   return product.save().then(savedProduct => {
+      //     expect(savedProduct.imageUrl).to.equal(['https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain'])
+      //     expect(savedProduct.name).to.equal('doggies')
+      //     expect(savedProduct.price).to.equal(1899)
+      //     expect(savedProduct.description).to.equal('its cute :)')
+      //   })
+      // })
 
       it('requires `name`', () => {
         product.name = null
