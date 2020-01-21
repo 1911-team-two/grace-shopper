@@ -3,32 +3,69 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import styled from 'styled-components'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>Society Team Two </h1>
-    <nav>
-      <Link to="/">Home</Link>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/profile">Profile</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
-      <Link to="/cart">Cart</Link>
-    </nav>
-    <hr />
-  </div>
+  <Wrapper>
+    <Link to="/">
+      <Logo>
+        <span>name</span>
+        <span>pending</span>
+      </Logo>
+    </Link>
+
+    {/* <Link to="/">Home</Link> */}
+    {isLoggedIn ? (
+      <Nav>
+        {/* The navbar will show these links after you log in */}
+        <NavLink to="/profile">My Account</NavLink>
+        <NavLink to="/cart">Cart</NavLink>
+        <NavLinkAnchor to="/" href="#" onClick={handleClick}>
+          Logout
+        </NavLinkAnchor>
+      </Nav>
+    ) : (
+      <Nav>
+        {/* The navbar will show these Navlinks before you log in */}
+        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/signup">Sign Up</NavLink>
+        <NavLink to="/cart">Cart</NavLink>
+      </Nav>
+    )}
+  </Wrapper>
 )
+
+// STYLES
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const Logo = styled.h1`
+  font-family: 'Quattrocento';
+  color: ${props => props.theme.pink};
+  font-size: 2rem;
+
+  span {
+    display: block;
+  }
+`
+
+const Nav = styled.nav`
+  display: flex;
+  min-width: 20vw;
+  justify-content: space-around;
+`
+
+const NavLink = styled(Link)`
+  font-size: 0.9rem;
+
+  :hover {
+    color: ${props => props.theme.pink};
+  }
+`
+const NavLinkAnchor = styled(NavLink)``
 
 /**
  * CONTAINER

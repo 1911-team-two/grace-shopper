@@ -151,9 +151,9 @@ describe('db Models', () => {
         return addressBook.save().then(savedAddress => {
           expect(savedAddress.address1).to.equal('20 Laurel Road')
           expect(savedAddress.address2).to.equal(null)
-          expect(savedAddress.city).to.equal('Pound Ridge'),
-            expect(savedAddress.state).to.equal('NY'),
-            expect(savedAddress.zip).to.equal(10576)
+          expect(savedAddress.city).to.equal('Pound Ridge')
+          expect(savedAddress.state).to.equal('NY')
+          expect(savedAddress.zip).to.equal(10576)
         })
       })
     })
