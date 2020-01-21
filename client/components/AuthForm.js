@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
@@ -10,27 +11,24 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
+    <Wrapper>
+      {error && error.response && <Alert>{error.response.data} </Alert>}
+
       <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
+        <label htmlFor="email">
+          <small>Email</small>
+        </label>
+        <input name="email" type="text" placeholder="Email" />
+        <label htmlFor="password">
+          <small>Password</small>
+        </label>
+        <input name="password" type="password" placeholder="Password" />
+        <button type="submit">{displayName}</button>
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
-    </div>
+      <button type="button">
+        <a href="/auth/google">{displayName} with Google</a>
+      </button>
+    </Wrapper>
   )
 }
 
@@ -81,3 +79,45 @@ AuthForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  form {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  label {
+    opacity: 0;
+    height: 0;
+  }
+
+  input {
+    margin: 0.1rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  button {
+    margin-top: 0.4rem;
+    padding: 0.4rem 0.6rem;
+    background: transparent;
+    border: 1px solid ${props => props.theme.pink};
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 0.8rem;
+    color: ${props => props.theme.pink};
+
+    :hover {
+      background: ${props => props.theme.pink};
+      color: white;
+    }
+  }
+`
+const Alert = styled.p`
+  font-size: 1.2rem;
+  color: ${props => props.theme.pink};
+`

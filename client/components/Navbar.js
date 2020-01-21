@@ -27,8 +27,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     ) : (
       <Nav>
         {/* The navbar will show these Navlinks before you log in */}
-        <NavLink to="/login">Login</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <NavLink to="/login">My Account</NavLink>
         <NavLink to="/cart">Cart</NavLink>
       </Nav>
     )}

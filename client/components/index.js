@@ -13,5 +13,6 @@ export {default as UserProfile} from './UserProfile'
 export {default as OrderProfile} from './SingleOrder'
 export {default as OrderConfirmation} from './OrderConfirmation'
 export {default as Footer} from './Footer'
+export {default as LoginOrSignup} from './LoginOrSignup'
 
 export {Login, Signup} from './AuthForm'

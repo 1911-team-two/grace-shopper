@@ -15,7 +15,7 @@ import './socket'
 // theme
 const theme = {
   pink: '#FB81BB',
-  background: '#FEF7F5'
+  black: '#39337B'
 }
 
 ReactDOM.render(
