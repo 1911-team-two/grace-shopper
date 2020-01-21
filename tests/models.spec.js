@@ -79,8 +79,9 @@ describe('db Models', () => {
 
       beforeEach(async () => {
         product = await Product.create({
-          imageUrl:
-            'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain',
+          imageUrl: [
+            'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain'
+          ],
           name: 'doggies',
           price: 1899,
           description: 'its cute :)'
@@ -89,9 +90,9 @@ describe('db Models', () => {
 
       it('includes `imageUrl`, `name`, `price` and `description` fields', () => {
         return product.save().then(savedProduct => {
-          expect(savedProduct.imageUrl).to.equal(
+          expect(savedProduct.imageUrl).to.equal([
             'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain'
-          )
+          ])
           expect(savedProduct.name).to.equal('doggies')
           expect(savedProduct.price).to.equal(1899)
           expect(savedProduct.description).to.equal('its cute :)')

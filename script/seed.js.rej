@@ -1,0 +1,64 @@
+diff a/script/seed.js b/script/seed.js	(rejected hunks)
+@@ -57,2 +57,4 @@ async function seed() {
+-      imageUrl:
+-        ['https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_d?$xlarge$&hei=900&qlt=80&fit=constrain'],
++      imageUrl: [
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_b?$xlarge$&hei=900&qlt=80&fit=constrain',
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/45327822_001_d?$xlarge$&hei=900&qlt=80&fit=constrain'
++      ],
+@@ -65,2 +67,4 @@ async function seed() {
+-      imageUrl:
+-        ['https://s7d5.scene7.com/is/image/UrbanOutfitters/53824355_014_b?$xlarge$&hei=900&qlt=80&fit=constrain', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/53824355_014_d?$xlarge$&hei=900&qlt=80&fit=constrain'],
++      imageUrl: [
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/53824355_014_b?$xlarge$&hei=900&qlt=80&fit=constrain',
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/53824355_014_d?$xlarge$&hei=900&qlt=80&fit=constrain'
++      ],
+@@ -73,2 +77,4 @@ async function seed() {
+-      imageUrl:
+-        ['https://s7d5.scene7.com/is/image/UrbanOutfitters/45802725_014_b?$xlarge$&hei=900&qlt=80&fit=constrain', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/45802725_014_d?$xlarge$&hei=900&qlt=80&fit=constrain'],
++      imageUrl: [
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/45802725_014_b?$xlarge$&hei=900&qlt=80&fit=constrain',
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/45802725_014_d?$xlarge$&hei=900&qlt=80&fit=constrain'
++      ],
+@@ -81,2 +87,4 @@ async function seed() {
+-      imageUrl:
+-        ['https://s7d5.scene7.com/is/image/UrbanOutfitters/49955818_017_b?$xlarge$&hei=900&qlt=80&fit=constrain', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/49955818_017_d?$xlarge$&hei=900&qlt=80&fit=constrain'],
++      imageUrl: [
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/49955818_017_b?$xlarge$&hei=900&qlt=80&fit=constrain',
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/49955818_017_d?$xlarge$&hei=900&qlt=80&fit=constrain'
++      ],
+@@ -89,2 +97,4 @@ async function seed() {
+-      imageUrl:
+-        ['https://s7d5.scene7.com/is/image/UrbanOutfitters/41089186_003_b?$xlarge$&hei=900&qlt=80&fit=constrain', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/41089186_003_d?$xlarge$&hei=900&qlt=80&fit=constrain'],
++      imageUrl: [
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/41089186_003_b?$xlarge$&hei=900&qlt=80&fit=constrain',
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/41089186_003_d?$xlarge$&hei=900&qlt=80&fit=constrain'
++      ],
+@@ -97,2 +107,4 @@ async function seed() {
+-      imageUrl:
+-        ['https://s7d5.scene7.com/is/image/UrbanOutfitters/45118072_010_b?$xlarge$&hei=900&qlt=80&fit=constrain', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/45118072_010_d?$xlarge$&hei=900&qlt=80&fit=constrain'],
++      imageUrl: [
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/45118072_010_b?$xlarge$&hei=900&qlt=80&fit=constrain',
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/45118072_010_d?$xlarge$&hei=900&qlt=80&fit=constrain'
++      ],
+@@ -105,2 +117,4 @@ async function seed() {
+-      imageUrl:
+-        ['https://s7d5.scene7.com/is/image/UrbanOutfitters/55531511_014_b?$xlarge$&hei=900&qlt=80&fit=constrain', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/55531511_014_d?$xlarge$&hei=900&qlt=80&fit=constrain'],
++      imageUrl: [
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/55531511_014_b?$xlarge$&hei=900&qlt=80&fit=constrain',
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/55531511_014_d?$xlarge$&hei=900&qlt=80&fit=constrain'
++      ],
+@@ -113,2 +127,4 @@ async function seed() {
+-      imageUrl:
+-        ['https://s7d5.scene7.com/is/image/UrbanOutfitters/55782726_014_b?$xlarge$&hei=900&qlt=80&fit=constrain', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/55782726_014_d?$xlarge$&hei=900&qlt=80&fit=constrain'],
++      imageUrl: [
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/55782726_014_b?$xlarge$&hei=900&qlt=80&fit=constrain',
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/55782726_014_d?$xlarge$&hei=900&qlt=80&fit=constrain'
++      ],
+@@ -121,2 +137,4 @@ async function seed() {
+-      imageUrl:
+-        ['https://s7d5.scene7.com/is/image/UrbanOutfitters/54051578_014_b?$xlarge$&hei=900&qlt=80&fit=constrain', 'https://s7d5.scene7.com/is/image/UrbanOutfitters/54051578_014_d?$xlarge$&hei=900&qlt=80&fit=constrain'],
++      imageUrl: [
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/54051578_014_b?$xlarge$&hei=900&qlt=80&fit=constrain',
++        'https://s7d5.scene7.com/is/image/UrbanOutfitters/54051578_014_d?$xlarge$&hei=900&qlt=80&fit=constrain'
++      ],

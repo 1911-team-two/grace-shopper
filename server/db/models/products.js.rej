@@ -1,0 +1,4 @@
+diff a/server/db/models/products.js b/server/db/models/products.js	(rejected hunks)
+@@ -6 +6 @@ const Product = db.define('product', {
+-    type: Sequelize.ARRAY(Sequelize.STRING),
++    type: Sequelize.ARRAY(Sequelize.STRING)

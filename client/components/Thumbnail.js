@@ -6,7 +6,7 @@ const Thumbnail = props => {
   return (
     <div>
       <Link to={`/product/${product.id}`}>
-        <img src={product.imageUrl} alt={product.name} />
+        <img src={product.imageUrl[0]} alt={product.name} />
         <p>{product.name}</p>
         <p>${product.price / 100}</p>
       </Link>
