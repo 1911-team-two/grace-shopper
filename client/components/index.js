@@ -12,5 +12,6 @@ export {default as Cart} from './Cart'
 export {default as UserProfile} from './UserProfile'
 export {default as OrderProfile} from './SingleOrder'
 export {default as OrderConfirmation} from './OrderConfirmation'
+export {default as Footer} from './Footer'
 
 export {Login, Signup} from './AuthForm'
