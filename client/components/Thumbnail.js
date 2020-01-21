@@ -7,7 +7,7 @@ const Thumbnail = props => {
   return (
     <Wrapper>
       <Link to={`/product/${product.id}`}>
-        <Image src={product.imageUrl} />
+        <img src={product.imageUrl[0]} alt={product.name} />
         <p>{product.name}</p>
         <p>${product.price / 100}</p>
       </Link>

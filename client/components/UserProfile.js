@@ -31,7 +31,7 @@ class UserProfile extends Component {
                   Click here to view more details
                 </a>
                 <br></br>
-                <img src={order.orderProducts[0].product.imageUrl} />
+                <img src={order.orderProducts[0].product.imageUrl[0]} />
 
                 {/* {order.orderProducts.map(item => {
                     return <img src=`({item.product.imageUrl})` />

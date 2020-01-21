@@ -7,7 +7,24 @@ import {addToCart} from '../store/cart'
 export class SingleProduct extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      product: {
+        imageUrl: []
+      }
+    }
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.getProducts(this.props.match.params.id)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.product !== this.props.product) {
+      this.setState({
+        product: this.props.product
+      })
+    }
   }
 
   handleSubmit(event) {
@@ -18,14 +35,19 @@ export class SingleProduct extends React.Component {
     // await axios.post('/api/cart/', this.state.product, quantity)
     this.props.addToCart(this.props.product, quantity)
   }
-
   render() {
-    const product = this.props.product
+    const product = this.state.product
+    console.log('PROPS', this.props)
     return (
       <div>
-        <div id="product-main">
+        <div key={product.id} id="product-main">
           <h2>{product.name}</h2>
-          <img src={product.imageUrl} alt={product.name} />
+          <a>
+            {product.imageUrl.map(image => {
+              return <img src={image} />
+            })}
+          </a>
+          {/* <img src={product.imageUrl[0]} /> */}
         </div>
 
         <div id="product-details">

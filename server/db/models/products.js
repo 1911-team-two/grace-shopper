@@ -3,9 +3,9 @@ const db = require('../db')
 
 const Product = db.define('product', {
   imageUrl: {
-    type: Sequelize.STRING,
-    defaultValue:
-      'https://leeresidentialnyc.com/wp-content/uploads/2018/09/image-not-found-1.jpg'
+    type: Sequelize.ARRAY(Sequelize.STRING)
+    // defaultValue:
+    //   'https://leeresidentialnyc.com/wp-content/uploads/2018/09/image-not-found-1.jpg'
   },
   name: {
     type: Sequelize.STRING,

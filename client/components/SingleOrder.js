@@ -29,7 +29,6 @@ class OrderProfile extends Component {
   render() {
     // console.log('PROPS', this.props)
     const order = this.state.order
-    console.log('ORDER', order)
     const products = order.orderProducts
     // console.log(products)
     // products.map(e => console.log('product'))
@@ -53,7 +52,7 @@ class OrderProfile extends Component {
               <li key={item.product.id}>
                 <h3>{item.product.name}</h3>
                 <h5>${item.product.price}</h5>
-                <img src={item.product.imageUrl} />
+                <img src={item.product.imageUrl[0]} />
               </li>
             )
           })}

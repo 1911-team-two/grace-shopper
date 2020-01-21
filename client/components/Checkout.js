@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router'
 import axios from 'axios'
 import AddressForm from './AddressForm'
 import CheckoutCart from './CheckoutReview'
@@ -8,20 +9,21 @@ export class Checkout extends React.Component {
   constructor() {
     super()
     this.state = {
-      shipping_firstName: '',
-      shipping_lastName: '',
-      shipping_addressLineOne: '',
-      shipping_addressLineTwo: '',
-      shipping_city: '',
-      shipping_state: '',
-      shipping_zip: '',
-      billing_firstName: '',
-      billing_lastName: '',
-      billing_addressLineOne: '',
-      billing_addressLineTwo: '',
-      billing_city: '',
-      billing_state: '',
-      billing_zip: ''
+      // shipping_firstName: '',
+      // shipping_lastName: '',
+      // shipping_addressLineOne: '',
+      // shipping_addressLineTwo: '',
+      // shipping_city: '',
+      // shipping_state: '',
+      // shipping_zip: '',
+      // billing_firstName: '',
+      // billing_lastName: '',
+      // billing_addressLineOne: '',
+      // billing_addressLineTwo: '',
+      // billing_city: '',
+      // billing_state: '',
+      // billing_zip: '',
+      orderPosted: false
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -42,10 +44,22 @@ export class Checkout extends React.Component {
     }
 
     const res = await axios.post('/api/orders', userInfoToBePosted)
-    console.log('res:', res)
+    if (res) {
+      this.setState({orderPosted: res.data})
+    }
   }
 
   render() {
+    if (this.state.orderPosted) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/confirmation',
+            state: {id: this.state.orderPosted.id}
+          }}
+        />
+      )
+    }
     return (
       <form onSubmit={this.handleSubmit}>
         <h2>Checkout</h2>

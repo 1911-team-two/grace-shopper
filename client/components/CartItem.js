@@ -20,7 +20,7 @@ class CartItem extends React.Component {
     return (
       <div>
         <Link to={`/product/${product.id}`}>
-          <img src={product.imageUrl} alt="" />
+          <img src={product.imageUrl[0]} alt="" />
           <p>{product.name}</p>
         </Link>
         <div>
