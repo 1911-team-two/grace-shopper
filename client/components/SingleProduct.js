@@ -37,6 +37,7 @@ export class SingleProduct extends React.Component {
   }
   render() {
     const product = this.state.product
+    console.log('PROPS', this.props)
     return (
       <div>
         <div key={product.id} id="product-main">
