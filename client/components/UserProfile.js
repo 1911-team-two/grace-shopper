@@ -21,6 +21,7 @@ class UserProfile extends Component {
 
         <ul>
           {orders.map(order => {
+            console.log('order:', order)
             let date = new Date(order.updatedAt)
             return (
               <li key={order.id}>

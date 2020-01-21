@@ -6,8 +6,9 @@ import {shallow} from 'enzyme'
 // import Adapter from 'enzyme-adapter-react-16'
 // import configureMockStore from 'redux-mock-store'
 
-import {Home} from '../../client/components/Home'
+import {Home, Header} from '../../client/components/Home'
 import AllProducts from '../../client/components/AllProducts'
+
 // import Thumbnail from '../client/components/Thumbnail'
 
 // const mockStore = configureMockStore()
@@ -26,8 +27,8 @@ describe('Home', () => {
     )
   })
 
-  it('renders a header in an h2', () => {
-    expect(wrapper.find('h2').text()).to.equal('All products')
+  it('renders two headers', () => {
+    expect(wrapper.find(Header)).to.have.lengthOf(2)
   })
 
   it('renders the AllProducts component', () => {

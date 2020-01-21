@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import styled from 'styled-components'
 
 import {Navbar} from './components'
 import Routes from './routes'
@@ -13,10 +14,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <Wrapper>
         <Navbar />
         <Routes />
-      </div>
+      </Wrapper>
     )
   }
 }
@@ -26,3 +27,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(null, mapDispatchToProps)(App)
+
+const Wrapper = styled.div`
+  padding: 5vh 4vw;
+`
