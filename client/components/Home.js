@@ -21,7 +21,7 @@ export class Home extends React.Component {
 
 export default Home
 
-const Header = styled.h2`
+export const Header = styled.h2`
   font-size: 2rem;
   color: pink;
   font-weight: 300;

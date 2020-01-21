@@ -6,7 +6,7 @@ export class AllProducts extends React.Component {
   render() {
     return (
       <div style={{display: 'flex'}} className="allProducts">
-        {this.props.allProducts.splice(2).map(product => {
+        {this.props.allProducts.map(product => {
           return <Thumbnail product={product} key={product.id} />
         })}
       </div>
