@@ -48,15 +48,6 @@ export const fetchSingleOrder = id => {
   }
 }
 
-// export const postOrder = () => {
-//   return async dispatch => {
-// try {
-// } catch (error) {
-//   dispatch(failedToPostOrder(error))
-// }
-// }
-// }
-
 /** INIT  **/
 const initialState = {
   defaultOrder: [],

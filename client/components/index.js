@@ -11,5 +11,6 @@ export {default as AddressForm} from './AddressForm'
 export {default as Cart} from './Cart'
 export {default as UserProfile} from './UserProfile'
 export {default as OrderProfile} from './SingleOrder'
+export {default as OrderConfirmation} from './OrderConfirmation'
 
 export {Login, Signup} from './AuthForm'
