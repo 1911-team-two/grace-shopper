@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
+
 import PropTypes from 'prop-types'
 
 import {
@@ -11,7 +12,8 @@ import {
   Cart,
   UserProfile,
   Checkout,
-  OrderConfirmation
+  OrderConfirmation,
+  Navbar
 } from './components'
 
 import {me} from './store'
@@ -29,33 +31,41 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route path="/cart" component={Cart} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-
-        <Route path="/checkout" component={Checkout} />
-        <Route path="/confirmation" component={OrderConfirmation} />
-
-        <Route path="/product/:id" component={SingleProduct} />
-        <Route exact path="/profile/:orderId" component={SingleOrder} />
-        <Route path="/profile" component={UserProfile} />
-
-        <Route path="/" component={Home} />
-
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-          </Switch>
-        )}
-        {/* Displays our Login component as a fallback */}
-        {/* <Route component={Login} /> */}
-      </Switch>
+      <div>
+        <Switch>
+          {/* Routes placed here are available to all visitors */}
+          <Route exact path="/checkout" component={Checkout} />
+          <Route component={hasHeader} />
+          {isLoggedIn && (
+            <Switch>
+              {/* Routes placed here are only available after logging in */}
+            </Switch>
+          )}
+          {/* Displays our Login component as a fallback */}
+          {/* <Route component={Login} /> */}
+        </Switch>
+      </div>
     )
   }
 }
 
+const hasHeader = () => (
+  <div>
+    <Navbar />
+    <Route path="/cart" component={Cart} />
+    <Route path="/login" component={Login} />
+    <Route path="/signup" component={Signup} />
+
+    <Route exact path="/checkout" component={Checkout} />
+    <Route path="/confirmation" component={OrderConfirmation} />
+
+    <Route exact path="/product/:id" component={SingleProduct} />
+    <Route exact path="/profile/:orderId" component={SingleOrder} />
+    <Route path="/profile" component={UserProfile} />
+
+    <Route exact path="/" component={Home} />
+  </div>
+)
 /**
  * CONTAINER
  */
