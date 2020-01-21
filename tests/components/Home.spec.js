@@ -27,8 +27,8 @@ describe('Home', () => {
     )
   })
 
-  it('renders a header in an h2', () => {
-    expect(wrapper.find(Header).text()).to.equal('All products')
+  it('renders two headers', () => {
+    expect(wrapper.find(Header)).to.have.lengthOf(2)
   })
 
   it('renders the AllProducts component', () => {
