@@ -2,7 +2,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getCart} from '../store/cart'
-import CartItem from './CartItem'
+import CheckoutReviewItem from './CheckoutReviewItem'
 
 export class CheckoutReview extends React.Component {
   componentDidMount() {
@@ -15,7 +15,7 @@ export class CheckoutReview extends React.Component {
 
         <div>
           {this.props.cart.map((item, i) => {
-            return <CartItem key={i} item={item} />
+            return <CheckoutReviewItem key={i} item={item} />
           })}
         </div>
       </div>
