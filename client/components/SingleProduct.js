@@ -37,7 +37,7 @@ export class SingleProduct extends React.Component {
   }
   render() {
     const product = this.state.product
-    console.log('PROPS', this.props)
+    console.log('STATE', this.state)
     return (
       <Wrapper>
         <StyledImg id="product-main">

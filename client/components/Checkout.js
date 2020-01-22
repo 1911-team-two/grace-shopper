@@ -71,6 +71,7 @@ export class Checkout extends React.Component {
     }
 
     const res = await axios.post('/api/orders', userInfoToBePosted)
+    console.log('res:', res)
     if (res) {
       this.setState({orderPosted: res.data})
     }
@@ -134,7 +135,7 @@ export class Checkout extends React.Component {
           <input
             type="submit"
             value="Place Order"
-            onSubmit={this.handleSubmit}
+            onClick={this.handleSubmit}
           />
         </RightPane>
       </Wrapper>
