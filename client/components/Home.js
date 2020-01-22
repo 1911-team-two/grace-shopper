@@ -24,6 +24,7 @@ export default Home
 export const Header = styled.h2`
   font-size: 1.4rem;
   letter-spacing: 0.1rem;
+
   color: pink;
   font-weight: 300;
   text-transform: uppercase;

@@ -51,7 +51,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `
 
-const Logo = styled.h1`
+export const Logo = styled.h1`
   font-family: 'Quattrocento';
   color: ${props => props.theme.pink};
   font-size: 2rem;
