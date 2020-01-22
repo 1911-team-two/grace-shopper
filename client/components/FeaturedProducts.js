@@ -25,5 +25,7 @@ export default connect(mapStateToProps)(FeaturedProducts)
 const Wrapper = styled.div`
   display: flex;
   overflow-x: scroll;
-  margin-right: -4vw;
+  margin: 0 -4vw;
+  padding-bottom: 2rem;
+  padding-left: 4vw;
 `
