@@ -159,7 +159,7 @@ const Wrapper = styled.div`
   grid-gap: 5%;
 `
 
-const Title = styled.h2`
+export const Title = styled.h2`
   font-weight: 400;
   font-size: 35px;
   text-decoration: underline;

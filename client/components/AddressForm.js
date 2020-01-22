@@ -51,13 +51,13 @@ export default AddressForm
 
 const Wrapper = styled.div``
 
-const Fieldset = styled.fieldset`
+export const Fieldset = styled.fieldset`
   max-width: 30vw;
   padding: 0;
   border: 0;
 `
 
-const Title = styled.h3`
+export const Title = styled.h3`
   font-weight: 300;
   font-size: 25px;
 `
