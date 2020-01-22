@@ -93,7 +93,6 @@ export class Checkout extends React.Component {
       totalPrice += item.product.price * item.qty
     })
     totalPrice = totalPrice / 100
-    console.log('ORDER', this.props)
     return (
       <Wrapper onSubmit={this.handleSubmit}>
         <LeftPane>
