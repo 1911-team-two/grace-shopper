@@ -6,13 +6,17 @@ import {Login, Signup} from './AuthForm'
 const LoginOrSignup = () => {
   return (
     <Wrapper>
-      {/* <Header>Log In</Header> */}
-      <Login />
+      <Form>
+        <Header>Log In</Header>
+        <Login />
+      </Form>
       <Spacer>
         <p>OR</p>
       </Spacer>
-      {/* <Header>Sign Up</Header> */}
-      <Signup />
+      <Form>
+        <Header>Sign Up</Header>
+        <Signup />
+      </Form>
     </Wrapper>
   )
 }
@@ -31,9 +35,26 @@ const Wrapper = styled.div`
 const Header = styled.h2`
   font-family: 'Quattrocento';
   font-size: 1.2rem;
-  color: pink;
+  color: ${props => props.theme.black};
 `
 
 const Spacer = styled.div`
-  border: 1px solid ${props => props.theme.black};
+  display: flex;
+  justify-content: center;
+  border: 0.5px solid ${props => props.theme.black};
+  box-sizing: border-box;
+  width: 0;
+  height: 100%;
+  margin: 5rem;
+
+  p {
+    background: ${props => props.theme.background};
+    padding: 1rem;
+  }
+`
+
+const Form = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 `

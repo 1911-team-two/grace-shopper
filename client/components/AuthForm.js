@@ -23,11 +23,14 @@ const AuthForm = props => {
           <small>Password</small>
         </label>
         <input name="password" type="password" placeholder="Password" />
-        <button type="submit">{displayName}</button>
+
+        <ButtonContainer>
+          <button type="submit">{displayName}</button>
+          <a href="/auth/google">
+            <button type="button">{displayName} with Google</button>
+          </a>
+        </ButtonContainer>
       </form>
-      <button type="button">
-        <a href="/auth/google">{displayName} with Google</a>
-      </button>
     </Wrapper>
   )
 }
@@ -89,6 +92,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-flow: column;
     align-items: center;
+    margin-bottom: 2rem;
   }
 
   label {
@@ -98,7 +102,17 @@ const Wrapper = styled.div`
 
   input {
     margin: 0.1rem;
-    padding: 0.4rem 0.6rem;
+    padding: 0.6rem 0.8rem;
+    box-sizing: border-box;
+    border: 1px solid pink;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    caret-color: ${props => props.theme.pink};
+
+    :focus {
+      border: 1px solid ${props => props.theme.pink};
+      box-shadow: 0px 0px 3px 0px pink;
+    }
   }
 
   button {
@@ -106,10 +120,11 @@ const Wrapper = styled.div`
     padding: 0.4rem 0.6rem;
     background: transparent;
     border: 1px solid ${props => props.theme.pink};
-    border-radius: 3px;
+    border-radius: 2px;
     box-sizing: border-box;
     font-size: 0.8rem;
     color: ${props => props.theme.pink};
+    transition: all 0.2s ease;
 
     :hover {
       background: ${props => props.theme.pink};
@@ -117,6 +132,14 @@ const Wrapper = styled.div`
     }
   }
 `
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.4rem;
+`
+
 const Alert = styled.p`
   font-size: 1.2rem;
   color: ${props => props.theme.pink};
