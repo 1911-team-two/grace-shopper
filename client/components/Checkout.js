@@ -5,10 +5,12 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
 import axios from 'axios'
 import styled from 'styled-components'
+
 import AddressForm from './AddressForm'
 import CheckoutCart from './CheckoutReview'
 import PaymentForm from './PaymentForm'
 import {Logo} from './Navbar'
+import {clearCart} from '../store/cart'
 
 export class Checkout extends React.Component {
   constructor() {
@@ -73,6 +75,7 @@ export class Checkout extends React.Component {
     const res = await axios.post('/api/orders', userInfoToBePosted)
     if (res) {
       this.setState({orderPosted: res.data})
+      this.props.clearCart()
     }
   }
 
@@ -150,7 +153,11 @@ const mapStateToProps = state => ({
   cart: state.cart
 })
 
-export default connect(mapStateToProps)(Checkout)
+const mapDispatchToProps = dispatch => ({
+  clearCart: () => dispatch(clearCart())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
 
 const Wrapper = styled.div`
   background: white;
