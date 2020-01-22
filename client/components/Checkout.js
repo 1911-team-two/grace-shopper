@@ -12,13 +12,14 @@ export class Checkout extends React.Component {
   constructor() {
     super()
     this.state = {
-      shipping_firstName: '',
-      shipping_lastName: '',
-      shipping_addressLineOne: '',
-      shipping_addressLineTwo: '',
-      shipping_city: '',
-      shipping_state: '',
-      shipping_zip: '',
+      shipping_firstName: 'First name',
+      shipping_lastName: 'Last name',
+      shipping_addressLineOne: 'Address',
+      shipping_addressLineTwo: 'Apartment, suite, etc. (optional)',
+      shipping_city: 'City',
+      shipping_state: 'State',
+      shipping_country: 'State',
+      shipping_zip: 'Zip code',
       billing_firstName: '',
       billing_lastName: '',
       billing_addressLineOne: '',
@@ -31,12 +32,36 @@ export class Checkout extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.clearInput = this.clearInput.bind(this)
   }
 
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  clearInput(e) {
+    let labels = {
+      firstName: 'First name',
+      lastName: 'Last Name',
+      addressLineOne: 'Address',
+      addressLineTwo: 'Address (optional)',
+      city: 'City',
+      state: 'state',
+      zip: 'Zip Code'
+    }
+
+    if (labels[e.target.attributes.data.nodeValue] === e.target.value) {
+      this.setState({
+        [e.target.name]: ''
+      })
+    }
+    // if (e.target.defaultValue === e.target.value) {
+    //   this.setState({
+    //     [e.target.name]: ''
+    //   })
+    // }
   }
 
   async handleSubmit(e) {
@@ -72,6 +97,7 @@ export class Checkout extends React.Component {
             values={this.state}
             handleChange={this.handleChange}
             type="shipping"
+            handleClear={this.clearInput}
           />
 
           <fieldset className="payment_wrapper">
