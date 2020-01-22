@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import styled from 'styled-components'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, cart}) => (
   <Wrapper>
     <Link to="/">
       <Logo>
@@ -37,7 +37,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Icon>
             <img src="/cart.svg" />
           </Icon>{' '}
-          Cart
+          Cart ({cart.length})
         </NavLink>
       </Nav>
     )}
@@ -96,7 +96,8 @@ const Icon = styled.div`
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    cart: state.cart
   }
 }
 
