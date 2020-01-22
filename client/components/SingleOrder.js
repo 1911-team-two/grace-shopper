@@ -2,6 +2,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchSingleOrder} from '../store/order'
+import styled from 'styled-components'
 
 class OrderProfile extends Component {
   constructor(props) {
@@ -38,26 +39,30 @@ class OrderProfile extends Component {
       total += item.product.price
     })
     return (
-      <div>
-        <h1>Order # {order.id}</h1>
-        <h4>Order Date: {date.toLocaleDateString('en-US')}</h4>
-        <h4>Order Total: ${(total / 100).toFixed(2)}</h4>
-        <h5>Details</h5>
-        <hr />
-
-        <ul>
-          {products.map(item => {
-            item.product.price = (item.product.price / 100).toFixed(2)
-            return (
-              <li key={item.product.id}>
-                <h3>{item.product.name}</h3>
-                <h5>${item.product.price}</h5>
-                <img src={item.product.imageUrl[0]} />
-              </li>
-            )
-          })}
-        </ul>
-      </div>
+      <Wrapper>
+        <div>
+          <h1>Order # {order.id}</h1>
+          <OrderDate>Order Date: {date.toLocaleDateString('en-US')}</OrderDate>
+          <Total>Order Total: ${(total / 100).toFixed(2)}</Total>
+          <Details>Details</Details>
+          <hr />
+          <ProductWrapper>
+            {products.map(item => {
+              item.product.price = (item.product.price / 100).toFixed(2)
+              return (
+                <ul key={item.product.id}>
+                  <Name>{item.product.name}</Name>
+                  <Price>${item.product.price}</Price>
+                  <Image src={item.product.imageUrl[0]} />
+                </ul>
+              )
+            })}
+          </ProductWrapper>
+          <ButtonWrapper>
+            <Btn href="/profile/">Back to Orders</Btn>
+          </ButtonWrapper>
+        </div>
+      </Wrapper>
     )
   }
 }
@@ -75,3 +80,54 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(mapState, mapDispatch)(OrderProfile)
+
+const Wrapper = styled.div``
+
+const OrderDate = styled.h4`
+  margin-block-end: 0.5em;
+  font-weight: initial;
+`
+
+const Total = styled.h4`
+  margin-block-start: 0.5em;
+  font-weight: initial;
+`
+
+const Details = styled.h5`
+  font-size: 22px;
+  margin-block-end: 0.5em;
+`
+const ProductWrapper = styled.div`
+  display: flex;
+  overflow-x: auto;
+`
+
+const Name = styled.h5`
+  font-size: 20px;
+  margin-block-end: 0.3em;
+`
+const Price = styled.h6`
+  margin-block-start: 0.3em;
+  font-size: 17px;
+  font-weight: initial;
+  margin-block-end: 0.5em;
+`
+
+const Image = styled.img`
+  margin-block-start: 0.3em;
+  width: 300px;
+  height: auto;
+`
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const Btn = styled.a`
+  margin-block-start: 2em;
+  margin-block-end: 1.5em;
+  color: #fb80bb;
+  font-size: 18px;
+`
