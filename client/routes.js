@@ -5,8 +5,6 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import {
-  Login,
-  Signup,
   Home,
   SingleProduct,
   Cart,
@@ -54,8 +52,7 @@ const hasHeader = () => (
   <div>
     <Navbar />
     <Route path="/cart" component={Cart} />
-    <Route path="/login" component={Login} />
-    <Route path="/signup" component={Signup} />
+    <Route path="/login" component={LoginOrSignup} />
 
     <Route exact path="/checkout" component={Checkout} />
     <Route path="/confirmation" component={OrderConfirmation} />

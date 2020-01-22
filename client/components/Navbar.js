@@ -5,29 +5,28 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import styled from 'styled-components'
 
-const Navbar = ({handleClick, isLoggedIn, cart}) => (
-  <Wrapper>
-    <Link to="/">
-      <Logo>
-        <span>name</span>
-        <span>pending</span>
-      </Logo>
-    </Link>
-
-    {/* <Link to="/">Home</Link> */}
-    {isLoggedIn ? (
-      <Nav>
-        {/* The navbar will show these links after you log in */}
-        <NavLink to="/profile">My Account</NavLink>
-        <NavLink to="/cart">Cart</NavLink>
-        <NavLinkAnchor to="/" href="#" onClick={handleClick}>
-          Logout
-        </NavLinkAnchor>
-      </Nav>
+const Navbar = ({handleClick, isLoggedIn, cart}) => {
+  const accountLink = isLoggedIn ? '/profile' : '/login'
+  const logOut = () =>
+    isLoggedIn ? (
+      <NavLinkAnchor to="/" href="#" onClick={handleClick}>
+        Logout
+      </NavLinkAnchor>
     ) : (
+      ''
+    )
+
+  return (
+    <Wrapper>
+      <Link to="/">
+        <Logo>
+          <span>name</span>
+          <span>pending</span>
+        </Logo>
+      </Link>
+
       <Nav>
-        {/* The navbar will show these Navlinks before you log in */}
-        <NavLink to="/login">
+        <NavLink to={accountLink}>
           <Icon>
             <img src="/account.svg" />
           </Icon>{' '}
@@ -39,10 +38,11 @@ const Navbar = ({handleClick, isLoggedIn, cart}) => (
           </Icon>{' '}
           Cart ({cart.length})
         </NavLink>
+        {logOut()}
       </Nav>
-    )}
-  </Wrapper>
-)
+    </Wrapper>
+  )
+}
 
 // STYLES
 const Wrapper = styled.div`
