@@ -5,10 +5,12 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
 import axios from 'axios'
 import styled from 'styled-components'
+
 import AddressForm from './AddressForm'
 import CheckoutCart from './CheckoutReview'
 import PaymentForm from './PaymentForm'
 import {Logo} from './Navbar'
+import {clearCart} from '../store/cart'
 
 export class Checkout extends React.Component {
   constructor() {
@@ -74,6 +76,7 @@ export class Checkout extends React.Component {
     console.log('res:', res)
     if (res) {
       this.setState({orderPosted: res.data})
+      this.props.clearCart()
     }
   }
 
@@ -94,7 +97,6 @@ export class Checkout extends React.Component {
       totalPrice += item.product.price * item.qty
     })
     totalPrice = totalPrice / 100
-
     return (
       <Wrapper onSubmit={this.handleSubmit}>
         <LeftPane>
@@ -132,11 +134,15 @@ export class Checkout extends React.Component {
           <TotalWrapper>
             <span>Total</span> <span>${totalPrice}</span>
           </TotalWrapper>
-          <input
+          {/* <SubmitWrapper> */}
+          <Button
             type="submit"
-            value="Place Order"
             onClick={this.handleSubmit}
-          />
+            disabled={this.state.billing_zip === 'Zip code'}
+          >
+            Place Order
+          </Button>
+          {/* </SubmitWrapper> */}
         </RightPane>
       </Wrapper>
     )
@@ -148,7 +154,11 @@ const mapStateToProps = state => ({
   cart: state.cart
 })
 
-export default connect(mapStateToProps)(Checkout)
+const mapDispatchToProps = dispatch => ({
+  clearCart: () => dispatch(clearCart())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
 
 const Wrapper = styled.div`
   background: white;
@@ -202,4 +212,12 @@ const RightPane = styled.div`
 const TotalWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+`
+
+const Button = styled.button`
+  margin-block-start: 2em;
+  background-color: #fb80bb;
+  color: white;
+  height: 40px;
+  width: 100%;
 `

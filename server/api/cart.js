@@ -40,6 +40,11 @@ router.post('/', (req, res) => {
   res.status(201).json(req.session.cart)
 })
 
+router.delete('/', (req, res) => {
+  req.session.cart = []
+  res.status(200).send()
+})
+
 router.delete('/:id', (req, res) => {
   req.session.cart = req.session.cart.filter(item => {
     return item.product.id !== Number(req.params.id)

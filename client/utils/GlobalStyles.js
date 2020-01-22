@@ -13,6 +13,11 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   a, a:visited {
-    color: #39337B
+    color: #39337B;
+    transition: all 0.2s ease;
+  }
+
+  a:hover {
+    color: #FB81BB;
   }
 `

@@ -110,7 +110,6 @@ const Wrapper = styled.div`
     caret-color: ${props => props.theme.pink};
 
     :focus {
-      border: 1px solid ${props => props.theme.pink};
       box-shadow: 0px 0px 3px 0px pink;
     }
   }
