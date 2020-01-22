@@ -1,9 +1,7 @@
 const request = require('supertest')
-const {expect} = require('chai')
 const app = require('../../server/index')
 const db = require('../../server/db')
 const {Order, OrderProduct, Product, User} = require('../../server/db/models/')
-const createAuthenticatedRequest = require('../util')
 
 describe('Order routes', () => {
   beforeEach(async () => {
@@ -42,6 +40,19 @@ describe('Order routes', () => {
     })
 
     describe('GET /api/orders', () => {
+      let loggedInRequest
+
+      it('login', async () => {
+        loggedInRequest = request.agent(app)
+        await loggedInRequest
+          .post('/auth/login')
+          .send({
+            email: 'bob@gmail.com',
+            password: 'meh'
+          })
+          .expect(200)
+      })
+
       it('should return unauthorized for guests', async () => {
         await request(app)
           .get('/api/orders')
@@ -49,20 +60,24 @@ describe('Order routes', () => {
       })
 
       it('should get successfully for loggedin users and admins', async () => {
-        await createAuthenticatedRequest(
-          app,
-          {
-            email: 'bob@gmail.com',
-            password: 'meh'
-          },
-          async function(req) {
-            await req.get('/api/orders').expect(200)
-          }
-        )
+        await loggedInRequest.get('/api/orders').expect(200)
       })
     })
 
     describe('POST /api/orders', () => {
+      let loggedInRequest
+
+      it('login', async () => {
+        loggedInRequest = request.agent(app)
+        await loggedInRequest
+          .post('/auth/login')
+          .send({
+            email: 'bob@gmail.com',
+            password: 'meh'
+          })
+          .expect(200)
+      })
+
       it('should work successfully for guests', async () => {
         await request(app)
           .post('/api/orders')
@@ -80,21 +95,12 @@ describe('Order routes', () => {
       })
 
       it('should work successfully for loggedin users', async () => {
-        await createAuthenticatedRequest(
-          app,
-          {
-            email: 'bob@gmail.com',
-            password: 'meh'
-          },
-          async function(req) {
-            await req
-              .post('/api/orders')
-              .send({
-                cart: []
-              })
-              .expect(201)
-          }
-        )
+        await loggedInRequest
+          .post('/api/orders')
+          .send({
+            cart: []
+          })
+          .expect(201)
       })
     })
   })

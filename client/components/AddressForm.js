@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react'
+import styled from 'styled-components'
 import AddressFormInput from './AddressFormInput'
 
 export class AddressForm extends React.Component {
@@ -18,15 +19,16 @@ export class AddressForm extends React.Component {
       'addressLineOne',
       'addressLineTwo',
       'city',
+      'country',
       'state',
       'zip'
     ]
 
     return (
-      <div>
-        <h3>{this.props.title}</h3>
+      <Wrapper>
+        <Title>{this.props.title}</Title>
 
-        <fieldset name={this.props.type}>
+        <Fieldset name={this.props.type}>
           {dataNeeded.map((data, i) => {
             return (
               <AddressFormInput
@@ -35,13 +37,27 @@ export class AddressForm extends React.Component {
                 values={values}
                 data={data}
                 handleChange={this.props.handleChange}
+                handleClear={this.props.handleClear}
               />
             )
           })}
-        </fieldset>
-      </div>
+        </Fieldset>
+      </Wrapper>
     )
   }
 }
 
 export default AddressForm
+
+const Wrapper = styled.div``
+
+export const Fieldset = styled.fieldset`
+  max-width: 30vw;
+  padding: 0;
+  border: 0;
+`
+
+export const Title = styled.h3`
+  font-weight: 300;
+  font-size: 25px;
+`

@@ -1,39 +1,66 @@
+/* eslint-disable camelcase */
+/* eslint-disable react/no-unused-state */
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
 import axios from 'axios'
+import styled from 'styled-components'
 import AddressForm from './AddressForm'
 import CheckoutCart from './CheckoutReview'
+import PaymentForm from './PaymentForm'
+import {Logo} from './Navbar'
 
 export class Checkout extends React.Component {
   constructor() {
     super()
     this.state = {
-      // shipping_firstName: '',
-      // shipping_lastName: '',
-      // shipping_addressLineOne: '',
-      // shipping_addressLineTwo: '',
-      // shipping_city: '',
-      // shipping_state: '',
-      // shipping_zip: '',
-      // billing_firstName: '',
-      // billing_lastName: '',
-      // billing_addressLineOne: '',
-      // billing_addressLineTwo: '',
-      // billing_city: '',
-      // billing_state: '',
-      // billing_zip: '',
+      shipping_firstName: 'First name',
+      shipping_lastName: 'Last name',
+      shipping_addressLineOne: 'Address',
+      shipping_addressLineTwo: 'Apartment, suite, etc. (optional)',
+      shipping_city: 'City',
+      shipping_state: 'State',
+      shipping_country: 'Country',
+      shipping_zip: 'Zip code',
+      billing_firstName: 'First name',
+      billing_lastName: 'Last name',
+      billing_addressLineOne: 'Address',
+      billing_addressLineTwo: 'Apartment, suite, etc. (optional)',
+      billing_city: 'City',
+      billing_state: 'State',
+      billing_country: 'Country',
+      billing_zip: 'Zip code',
       orderPosted: false
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.clearInput = this.clearInput.bind(this)
   }
 
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  clearInput(e) {
+    let defaultValues = {
+      firstName: 'First name',
+      lastName: 'Last name',
+      addressLineOne: 'Address',
+      addressLineTwo: 'Apartment, suite, etc. (optional)',
+      city: 'City',
+      state: 'State',
+      country: 'Country',
+      zip: 'Zip code'
+    }
+
+    if (defaultValues[e.target.attributes.data.nodeValue] === e.target.value) {
+      this.setState({
+        [e.target.name]: ''
+      })
+    }
   }
 
   async handleSubmit(e) {
@@ -60,46 +87,57 @@ export class Checkout extends React.Component {
         />
       )
     }
+
+    let totalPrice = 0
+    this.props.cart.forEach(item => {
+      totalPrice += item.product.price * item.qty
+    })
+    totalPrice = totalPrice / 100
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h2>Checkout</h2>
-        <AddressForm
-          title="Shipping Address"
-          values={this.state}
-          handleChange={this.handleChange}
-          type="shipping"
-        />
+      <Wrapper onSubmit={this.handleSubmit}>
+        <LeftPane>
+          <Logo>
+            <span>name</span>
+            <span>pending</span>
+          </Logo>
+          <Title>Checkout</Title>
+          <AddressForm
+            title="Shipping Address"
+            values={this.state}
+            handleChange={this.handleChange}
+            type="shipping"
+            handleClear={this.clearInput}
+          />
 
-        <fieldset className="payment_wrapper">
-          <h3>Payment</h3>
-          <p>This is placeholder for payment details</p>
-          <label htmlFor="cc_number">Card Number</label>
-          <input type="text" name="cc_number" />
+          <div className="line"></div>
 
-          <label htmlFor="cardname">Name on Card</label>
-          <input type="text" name="cardname" />
+          <PaymentForm />
 
-          <label htmlFor="expiration">Expiration date (MM/YY)</label>
-          <input type="text" name="expiration" />
+          <div className="line"></div>
 
-          <label htmlFor="security">Security Code</label>
-          <input type="text" name="security" />
-        </fieldset>
+          <AddressForm
+            title="Billing Address"
+            values={this.state}
+            handleChange={this.handleChange}
+            type="billing"
+            handleClear={this.clearInput}
+          />
+        </LeftPane>
 
-        <AddressForm
-          title="Billing Address"
-          values={this.state}
-          handleChange={this.handleChange}
-          type="billing"
-        />
-
-        <CheckoutCart />
-        <input
-          type="submit"
-          value="Send Request"
-          handleSubmit={this.handleSubmit}
-        />
-      </form>
+        <RightPane>
+          <CheckoutCart />
+          <div className="divider"></div>
+          <TotalWrapper>
+            <span>Total</span> <span>${totalPrice}</span>
+          </TotalWrapper>
+          <input
+            type="submit"
+            value="Place Order"
+            onSubmit={this.handleSubmit}
+          />
+        </RightPane>
+      </Wrapper>
     )
   }
 }
@@ -110,3 +148,57 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(Checkout)
+
+const Wrapper = styled.div`
+  background: white;
+  margin: -5vh -4vw;
+  padding: 5vh 5vw;
+  display: grid;
+  grid-template-areas: 'form cart';
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 5%;
+`
+
+export const Title = styled.h2`
+  font-weight: 400;
+  font-size: 35px;
+  text-decoration: underline;
+  margin-bottom: 0.75rem;
+`
+
+const LeftPane = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 10vw;
+
+  .line {
+    background-color: pink;
+    height: 1px;
+    width: 68%;
+    margin: 9vh 0 3vh 0;
+  }
+`
+
+const RightPane = styled.div`
+  background-color: #f9f9f9;
+  margin: -5vh -5vw;
+  padding: 10%;
+  padding-right: 40%;
+
+  .divider {
+    background-color: #c0c0c0;
+    height: 1px;
+    width: 100%;
+    margin: 9vh 0 3vh 0;
+  }
+  img {
+    width: 80px;
+    height: auto;
+  }
+`
+
+const TotalWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
