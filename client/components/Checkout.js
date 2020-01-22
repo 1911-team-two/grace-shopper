@@ -7,6 +7,8 @@ import axios from 'axios'
 import styled from 'styled-components'
 import AddressForm from './AddressForm'
 import CheckoutCart from './CheckoutReview'
+import PaymentForm from './PaymentForm'
+import {Logo} from './Navbar'
 
 export class Checkout extends React.Component {
   constructor() {
@@ -18,15 +20,16 @@ export class Checkout extends React.Component {
       shipping_addressLineTwo: 'Apartment, suite, etc. (optional)',
       shipping_city: 'City',
       shipping_state: 'State',
-      shipping_country: 'State',
+      shipping_country: 'Country',
       shipping_zip: 'Zip code',
-      billing_firstName: '',
-      billing_lastName: '',
-      billing_addressLineOne: '',
-      billing_addressLineTwo: '',
-      billing_city: '',
-      billing_state: '',
-      billing_zip: '',
+      billing_firstName: 'First name',
+      billing_lastName: 'Last name',
+      billing_addressLineOne: 'Address',
+      billing_addressLineTwo: 'Apartment, suite, etc. (optional)',
+      billing_city: 'City',
+      billing_state: 'State',
+      billing_country: 'Country',
+      billing_zip: 'Zip code',
       orderPosted: false
     }
 
@@ -42,26 +45,22 @@ export class Checkout extends React.Component {
   }
 
   clearInput(e) {
-    let labels = {
+    let defaultValues = {
       firstName: 'First name',
-      lastName: 'Last Name',
+      lastName: 'Last name',
       addressLineOne: 'Address',
-      addressLineTwo: 'Address (optional)',
+      addressLineTwo: 'Apartment, suite, etc. (optional)',
       city: 'City',
-      state: 'state',
-      zip: 'Zip Code'
+      state: 'State',
+      country: 'Country',
+      zip: 'Zip code'
     }
 
-    if (labels[e.target.attributes.data.nodeValue] === e.target.value) {
+    if (defaultValues[e.target.attributes.data.nodeValue] === e.target.value) {
       this.setState({
         [e.target.name]: ''
       })
     }
-    // if (e.target.defaultValue === e.target.value) {
-    //   this.setState({
-    //     [e.target.name]: ''
-    //   })
-    // }
   }
 
   async handleSubmit(e) {
@@ -90,8 +89,12 @@ export class Checkout extends React.Component {
     }
     return (
       <Wrapper onSubmit={this.handleSubmit}>
-        <div>
-          <h2>Checkout</h2>
+        <LeftPane>
+          <Logo>
+            <span>name</span>
+            <span>pending</span>
+          </Logo>
+          <Title>Checkout</Title>
           <AddressForm
             title="Shipping Address"
             values={this.state}
@@ -100,36 +103,23 @@ export class Checkout extends React.Component {
             handleClear={this.clearInput}
           />
 
-          <fieldset className="payment_wrapper">
-            <h3>Payment</h3>
-            <p>This is placeholder for payment details</p>
-            <label htmlFor="cc_number">Card Number</label>
-            <input type="text" name="cc_number" />
-
-            <label htmlFor="cardname">Name on Card</label>
-            <input type="text" name="cardname" />
-
-            <label htmlFor="expiration">Expiration date (MM/YY)</label>
-            <input type="text" name="expiration" />
-
-            <label htmlFor="security">Security Code</label>
-            <input type="text" name="security" />
-          </fieldset>
+          <PaymentForm />
 
           <AddressForm
             title="Billing Address"
             values={this.state}
             handleChange={this.handleChange}
             type="billing"
+            handleClear={this.clearInput}
           />
-        </div>
+        </LeftPane>
 
         <RightPane>
           <CheckoutCart />
           <input
             type="submit"
             value="Place Order"
-            handleSubmit={this.handleSubmit}
+            onSubmit={this.handleSubmit}
           />
         </RightPane>
       </Wrapper>
@@ -152,6 +142,20 @@ const Wrapper = styled.div`
   grid-template-areas: 'form cart';
   grid-template-columns: 2fr 1fr;
   grid-gap: 5%;
+`
+
+const Title = styled.h2`
+  font-weight: 400;
+  font-size: 35px;
+  text-decoration: underline;
+  margin-bottom: 0.75rem;
+`
+
+const LeftPane = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 10vw;
 `
 
 const RightPane = styled.div`

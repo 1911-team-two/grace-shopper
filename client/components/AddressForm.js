@@ -12,7 +12,6 @@ export class AddressForm extends React.Component {
   render() {
     let values = this.props.values
     let type = this.props.type
-    // console.log('type:', values)
 
     let dataNeeded = [
       'firstName',
@@ -20,17 +19,17 @@ export class AddressForm extends React.Component {
       'addressLineOne',
       'addressLineTwo',
       'city',
-      'state',
       'country',
+      'state',
       'zip'
     ]
 
     return (
       <Wrapper>
-        <h3>{this.props.title}</h3>
+        <Title>{this.props.title}</Title>
 
         <Fieldset name={this.props.type}>
-          {/* {dataNeeded.map((data, i) => {
+          {dataNeeded.map((data, i) => {
             return (
               <AddressFormInput
                 key={i}
@@ -38,25 +37,10 @@ export class AddressForm extends React.Component {
                 values={values}
                 data={data}
                 handleChange={this.props.handleChange}
+                handleClear={this.props.handleClear}
               />
             )
-          })} */}
-
-          <div>
-            <AddressFormInput
-              type={type}
-              value={this.props.values[`${type}_firstName`]}
-              data="firstName"
-              handleChange={this.props.handleChange}
-              handleClear={this.props.handleClear}
-            />
-            <AddressFormInput
-              type={type}
-              value={this.props.values[`${type}_lastName`]}
-              data="_lastName"
-              handleChange={this.props.handleChange}
-            />
-          </div>
+          })}
         </Fieldset>
       </Wrapper>
     )
@@ -68,6 +52,12 @@ export default AddressForm
 const Wrapper = styled.div``
 
 const Fieldset = styled.fieldset`
+  max-width: 30vw;
   padding: 0;
   border: 0;
+`
+
+const Title = styled.h3`
+  font-weight: 300;
+  font-size: 25px;
 `
