@@ -8,6 +8,7 @@ const defaultCart = []
 
 export const GET_CART = 'GET_CART'
 export const UPDATE_CART = 'UPDATE_CART'
+export const CLEAR_CART = 'CLEAR_CART'
 
 /** ACTION CREATORS **/
 
@@ -16,6 +17,10 @@ export const gotCart = cart => ({type: GET_CART, cart})
 export const updateCart = cart => ({
   type: UPDATE_CART,
   cart
+})
+
+export const clearedCart = cart => ({
+  type: CLEAR_CART
 })
 
 /** THUNKS **/
@@ -58,6 +63,17 @@ export const changeQty = (item, qty) => async dispatch => {
   }
 }
 
+export const clearCart = () => async dispatch => {
+  try {
+    const res = await axios.delete('/api/cart')
+    if (res) {
+      return dispatch(clearedCart())
+    }
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 /** REDUCER  **/
 
 export default function(state = defaultCart, action) {
@@ -66,6 +82,8 @@ export default function(state = defaultCart, action) {
       return action.cart
     case UPDATE_CART:
       return action.cart
+    case CLEAR_CART:
+      return []
     default:
       return state
   }
