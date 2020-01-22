@@ -40,9 +40,9 @@ export class SingleProduct extends React.Component {
     console.log('PROPS', this.props)
     return (
       <Wrapper>
-        <StyledImg key={product.id} id="product-main">
+        <StyledImg id="product-main">
           <div>
-            <a>
+            <a key={product.id}>
               {product.imageUrl.map(image => {
                 return <img src={image} />
               })}
@@ -53,7 +53,7 @@ export class SingleProduct extends React.Component {
         </StyledImg>
         <StyledDetails>
           <div id="product-details">
-            <ProductName>{product.name}</ProductName>
+            <h2>{product.name}</h2>
             <Price>${product.price / 100}</Price>
 
             <Form onSubmit={this.handleSubmit}>
@@ -114,7 +114,7 @@ const StyledDetails = styled.div`
   top: 0;
 `
 
-const ProductName = styled.h2`
+const h2 = styled.h2`
   font-size: 50px;
   padding: 0px;
   margin-block-end: 0px;
