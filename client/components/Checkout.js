@@ -87,6 +87,13 @@ export class Checkout extends React.Component {
         />
       )
     }
+
+    let totalPrice = 0
+    this.props.cart.forEach(item => {
+      totalPrice += item.product.price * item.qty
+    })
+    totalPrice = totalPrice / 100
+
     return (
       <Wrapper onSubmit={this.handleSubmit}>
         <LeftPane>
@@ -103,7 +110,11 @@ export class Checkout extends React.Component {
             handleClear={this.clearInput}
           />
 
+          <div className="line"></div>
+
           <PaymentForm />
+
+          <div className="line"></div>
 
           <AddressForm
             title="Billing Address"
@@ -116,6 +127,10 @@ export class Checkout extends React.Component {
 
         <RightPane>
           <CheckoutCart />
+          <div className="divider"></div>
+          <TotalWrapper>
+            <span>Total</span> <span>${totalPrice}</span>
+          </TotalWrapper>
           <input
             type="submit"
             value="Place Order"
@@ -156,15 +171,34 @@ const LeftPane = styled.div`
   flex-direction: column;
 
   padding-left: 10vw;
+
+  .line {
+    background-color: pink;
+    height: 1px;
+    width: 68%;
+    margin: 9vh 0 3vh 0;
+  }
 `
 
 const RightPane = styled.div`
   background-color: #f9f9f9;
   margin: -5vh -5vw;
   padding: 10%;
+  padding-right: 40%;
 
+  .divider {
+    background-color: #c0c0c0;
+    height: 1px;
+    width: 100%;
+    margin: 9vh 0 3vh 0;
+  }
   img {
     width: 80px;
     height: auto;
   }
+`
+
+const TotalWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
