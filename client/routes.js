@@ -13,11 +13,8 @@ import {
   UserProfile,
   Checkout,
   OrderConfirmation,
-
-  Navbar
-
+  Navbar,
   LoginOrSignup
-
 } from './components'
 
 import {me} from './store'
