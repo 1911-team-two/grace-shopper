@@ -95,13 +95,14 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: max-content;
 `
 const StyledImg = styled.div`
   display: flex;
   flex-direction: column;
   padding: 60px;
   align-items: flex-start;
-  height: 700px;
+  /* height: 700px; */
   margin-block-end: 20px;
 `
 
@@ -110,8 +111,8 @@ const StyledDetails = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 50px;
-  position: sticky;
-  top: 0;
+  /* position: sticky;
+  top: 0; */
 `
 
 const h2 = styled.h2`

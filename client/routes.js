@@ -62,7 +62,7 @@ const hasHeader = () => (
 
     <Route exact path="/product/:id" component={SingleProduct} />
     <Route exact path="/profile/:orderId" component={SingleOrder} />
-    <Route path="/profile" component={UserProfile} />
+    <Route exact path="/profile" component={UserProfile} />
 
     <Route exact path="/" component={Home} />
   </div>
