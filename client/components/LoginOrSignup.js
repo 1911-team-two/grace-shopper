@@ -7,14 +7,14 @@ const LoginOrSignup = () => {
   return (
     <Wrapper>
       <Form>
-        <Header>Log In</Header>
+        <Header>login</Header>
         <Login />
       </Form>
       <Spacer>
         <p>OR</p>
       </Spacer>
       <Form>
-        <Header>Sign Up</Header>
+        <Header>sign up</Header>
         <Signup />
       </Form>
     </Wrapper>

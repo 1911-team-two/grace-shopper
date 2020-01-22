@@ -17,6 +17,7 @@ class Navbar extends React.Component {
     this.handleOpenCart = this.handleOpenCart.bind(this)
   }
 
+
   handleOpenCart(e) {
     if (this.state.cartOpen === false) {
       document.body.style.overflow = 'hidden'
@@ -38,6 +39,7 @@ class Navbar extends React.Component {
             <span>pending</span>
           </Logo>
         </Link>
+
 
         <CartModal
           handleOpenCart={this.handleOpenCart}
@@ -130,7 +132,8 @@ const Icon = styled.div`
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    cart: state.cart
   }
 }
 
