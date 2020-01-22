@@ -5,7 +5,6 @@ const db = require('../../server/db')
 const app = require('../../server/index')
 const Product = db.model('product')
 const User = db.model('user')
-const createAuthenticatedRequest = require('../util')
 
 describe('Product routes', () => {
   beforeEach(async () => {
@@ -57,7 +56,20 @@ describe('Product routes', () => {
       )
     })
 
-    describe('POST /api/products', async () => {
+    describe('POST /api/products', () => {
+      let loggedInRequest
+
+      it('login', async () => {
+        loggedInRequest = request.agent(app)
+        await loggedInRequest
+          .post('/auth/login')
+          .send({
+            email: 'jane@gmail.com',
+            password: 'toolazytosetapassword'
+          })
+          .expect(200)
+      })
+
       it('should return unauthorized for guest users', async () => {
         await request(app)
           .post('/api/products/')
@@ -70,32 +82,36 @@ describe('Product routes', () => {
       })
 
       it('should post successfully for admins', async () => {
-        await createAuthenticatedRequest(
-          app,
-          {
-            email: 'jane@gmail.com',
-            password: 'toolazytosetapassword'
-          },
-          async function(request) {
-            let res = await request
-              .post('/api/products/')
-              .send({
-                name: 'Pine leaves',
-                price: 17,
-                description: 'Beautiful printed leaves'
-              })
-              .expect(201)
+        let res = await loggedInRequest
+          .post('/api/products/')
+          .send({
+            name: 'Pine leaves',
+            price: 17,
+            description: 'Beautiful printed leaves'
+          })
+          .expect(201)
 
-            expect(res.body).to.be.an('object')
-            expect(res.body.name).to.be.equal('Pine leaves')
-            expect(res.body.price).to.be.equal(17)
-            expect(res.body.description).to.be.equal('Beautiful printed leaves')
-          }
-        )
+        expect(res.body).to.be.an('object')
+        expect(res.body.name).to.be.equal('Pine leaves')
+        expect(res.body.price).to.be.equal(17)
+        expect(res.body.description).to.be.equal('Beautiful printed leaves')
       })
     })
 
-    describe('PUT /api/products/:productid', async (req, res, next) => {
+    describe('PUT /api/products/:productid', () => {
+      let loggedInRequest
+
+      it('login', async () => {
+        loggedInRequest = request.agent(app)
+        await loggedInRequest
+          .post('/auth/login')
+          .send({
+            email: 'jane@gmail.com',
+            password: 'toolazytosetapassword'
+          })
+          .expect(200)
+      })
+
       it('should return unauthorized for users except admins', async () => {
         await request(app)
           .put('/api/products/1')
@@ -108,32 +124,36 @@ describe('Product routes', () => {
       })
 
       it('should update successfully for admins', async () => {
-        await createAuthenticatedRequest(
-          app,
-          {
-            email: 'jane@gmail.com',
-            password: 'toolazytosetapassword'
-          },
-          async function(request) {
-            let res = await request
-              .put('/api/products/1')
-              .send({
-                name: 'Pine leaves',
-                price: 23,
-                description: 'Beautiful printed leaves'
-              })
-              .expect(200)
+        let res = await loggedInRequest
+          .put('/api/products/1')
+          .send({
+            name: 'Pine leaves',
+            price: 23,
+            description: 'Beautiful printed leaves'
+          })
+          .expect(200)
 
-            expect(res.body).to.be.an('object')
-            expect(res.body.name).to.be.equal('Pine leaves')
-            expect(res.body.price).to.be.equal(23)
-            expect(res.body.description).to.be.equal('Beautiful printed leaves')
-          }
-        )
+        expect(res.body).to.be.an('object')
+        expect(res.body.name).to.be.equal('Pine leaves')
+        expect(res.body.price).to.be.equal(23)
+        expect(res.body.description).to.be.equal('Beautiful printed leaves')
       })
     })
 
-    describe('DESTROY /api/products/:productId', async (req, res, next) => {
+    describe('DESTROY /api/products/:productId', () => {
+      let loggedInRequest
+
+      it('login', async () => {
+        loggedInRequest = request.agent(app)
+        await loggedInRequest
+          .post('/auth/login')
+          .send({
+            email: 'jane@gmail.com',
+            password: 'toolazytosetapassword'
+          })
+          .expect(200)
+      })
+
       it('should return unauthorized users except admins', async () => {
         await request(app)
           .delete('/api/products/1')
@@ -142,19 +162,10 @@ describe('Product routes', () => {
       })
 
       it('should delete successfully for admins', async () => {
-        await createAuthenticatedRequest(
-          app,
-          {
-            email: 'jane@gmail.com',
-            password: 'toolazytosetapassword'
-          },
-          async function(request) {
-            let res = await request
-              .delete('/api/products/1')
-              .send()
-              .expect(204)
-          }
-        )
+        await loggedInRequest
+          .delete('/api/products/1')
+          .send()
+          .expect(204)
       })
     })
   })
