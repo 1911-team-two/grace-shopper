@@ -24,7 +24,7 @@ deploy: # see README for details on these keys
   skip_cleanup: true
   provider: heroku
   # app should be your heroku app name; see README
-  app: societyteam2
+  app: name-pending
   # the secure key indicates an encrypted value; see README
   api_key:
     secure: fVkqObJ8KGCCpyoLHcNPFDdwgklUWJUG8dQ++oQz37TwZjZ24TkvaJzs18i8/lLzeNuN2etlvZuAJA6/0860JHjdNr7ze45xpP+D95pGh1nXWeebZKb8MrpFq92ESz2uj6evnQsRgun2yZthtyOWTiLlbeaDky+pzYCPcD1eHVq2yGlUzBALCqvttFiG+PBPsXGTZnrN76EpFP0j6UWmc9hDlT1LeAL56q4j/eDXMWbwOJI+fQF0ZZySLXJvT+rKG0ph+hRawrW66AYGZL3wh5nuOCCXhG+n4o9esYAQMls18T0UXXlMQSlWTYA9n368F2CYFyFsQ6rJjVN1N9aq613efxrKZpZUN/qY5qWzdlhhl46QNE94vGB6k0sg7WiaFM5z/eU3AiMC9LzxWIW1FHpLyXoPe8GqjRttXqet5amAUqYTznn2f491/y649DV3wGJjajY6ckKrGZfP41IPQ92ZKqoAr+GJg9Z9LdFBUNXyv+9hGSMtlabCG53bH8vRe0+YjauYjEGUX73LGjS6s3mr5M+AhpszDktBHQwN8Hso9QpFlvFVmgiB5Zk1HyvuMMMQcs0esFvM0gN2PorjSJEEyiYm3kSvcL6Bz6hAeOIwCiWoT+5H1I2r6nQYEi8OMyU3PGLnA88MSped9fA1oUm59m4yRtN4MJy4ijC43PY=
