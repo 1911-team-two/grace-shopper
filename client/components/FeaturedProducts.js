@@ -7,9 +7,9 @@ import Thumbnail from './Thumbnail'
 export class FeaturedProducts extends React.Component {
   render() {
     return (
-      <Wrapper className="allProducts">
+      <Wrapper className="featuredProducts">
         {this.props.allProducts.splice(0, 4).map(product => {
-          return <Thumbnail product={product} key={product.id} />
+          return <Thumbnail featured product={product} key={product.id} />
         })}
       </Wrapper>
     )
@@ -24,5 +24,8 @@ export default connect(mapStateToProps)(FeaturedProducts)
 
 const Wrapper = styled.div`
   display: flex;
-  overflow-x: auto;
+  overflow-x: scroll;
+  margin: 0 -4vw;
+  padding-bottom: 2rem;
+  padding-left: 4vw;
 `
