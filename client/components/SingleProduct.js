@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
 import {getProducts} from '../store/products'
 import {addToCart} from '../store/cart'
+import styled from 'styled-components'
 
 export class SingleProduct extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ export class SingleProduct extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getProducts(this.props.match.params.id)
+    this.props.getProducts()
   }
 
   componentDidUpdate(prevProps) {
@@ -39,50 +39,37 @@ export class SingleProduct extends React.Component {
     const product = this.state.product
     console.log('PROPS', this.props)
     return (
-      <div>
-        <div key={product.id} id="product-main">
-          <h2>{product.name}</h2>
-          <a>
-            {product.imageUrl.map(image => {
-              return <img src={image} />
-            })}
-          </a>
+      <Wrapper>
+        <StyledImg key={product.id} id="product-main">
+          <div>
+            <a>
+              {product.imageUrl.map(image => {
+                return <img src={image} />
+              })}
+            </a>
+          </div>
+
           {/* <img src={product.imageUrl[0]} /> */}
-        </div>
+        </StyledImg>
+        <StyledDetails>
+          <div id="product-details">
+            <ProductName>{product.name}</ProductName>
+            <Price>${product.price / 100}</Price>
 
-        <div id="product-details">
-          <p id="product-description">{product.description}</p>
-
-          <form onSubmit={this.handleSubmit}>
-            {/* <div className="radio-group">
-              <label htmlFor="size">Size</label>
-              <div>
-                <input
-                  type="radio"
-                  name="size"
-                  value="11x7"
-                  id="11x7"
-                  defaultChecked
-                />
-                <label htmlFor="11x17">11 x 17</label>
-              </div>
-
-              <div>
-                <input type="radio" name="size" value="24x36" id="24x36" />
-                <label htmlFor="24x36">24 x 36</label>
-              </div>
-            </div> */}
-
-            <div>
-              <label htmlFor="quantity">Quantity</label>
-              <input type="number" min="1" name="quantity" defaultValue="1" />
-            </div>
-
-            <p>${product.price / 100}</p>
-            <button type="submit">Add to Cart</button>
-          </form>
-        </div>
-      </div>
+            <Form onSubmit={this.handleSubmit}>
+              <Button type="submit">Add to Cart</Button>
+              <Quantity>
+                <label htmlFor="quantity">Quantity</label>
+                <input type="number" min="1" name="quantity" defaultValue="1" />
+              </Quantity>
+            </Form>
+            <Header>Description:</Header>
+            <Description id="product-description">
+              {product.description}
+            </Description>
+          </div>
+        </StyledDetails>
+      </Wrapper>
     )
   }
 }
@@ -103,3 +90,66 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+const StyledImg = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 60px;
+  align-items: flex-start;
+  height: 700px;
+  margin-block-end: 20px;
+`
+
+const StyledDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 50px;
+  position: sticky;
+  top: 0;
+`
+
+const ProductName = styled.h2`
+  font-size: 50px;
+  padding: 0px;
+  margin-block-end: 0px;
+  margin-block-start: 0px;
+`
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+`
+
+const Quantity = styled.div`
+  margin: 0px;
+  margin-block-start: 20px;
+`
+
+const Price = styled.p`
+  font-size: 30px;
+  margin-block-start: 0px;
+`
+
+const Header = styled.h4`
+  font-size: 30px;
+  margin-block-end: 0.5em;
+`
+
+const Description = styled.p`
+  font-size: 22px;
+  margin-block-start: 0em;
+`
+
+const Button = styled.button`
+  background-color: #fb80bb;
+  color: white;
+  height: 50px;
+  font-size: 25px;
+`
