@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import styled from 'styled-components'
 
-import {Navbar} from './components'
+import {Navbar, Footer} from './components'
 import Routes from './routes'
 import {getProducts} from './store/products'
 
@@ -17,6 +17,7 @@ class App extends React.Component {
       <Wrapper>
         <Navbar />
         <Routes />
+        <Footer />
       </Wrapper>
     )
   }

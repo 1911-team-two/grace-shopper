@@ -27,9 +27,18 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     ) : (
       <Nav>
         {/* The navbar will show these Navlinks before you log in */}
-        <NavLink to="/login">Login</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
-        <NavLink to="/cart">Cart</NavLink>
+        <NavLink to="/login">
+          <Icon>
+            <img src="/account.svg" />
+          </Icon>{' '}
+          My Account
+        </NavLink>
+        <NavLink to="/cart">
+          <Icon>
+            <img src="/cart.svg" />
+          </Icon>{' '}
+          Cart
+        </NavLink>
       </Nav>
     )}
   </Wrapper>
@@ -49,23 +58,38 @@ const Logo = styled.h1`
 
   span {
     display: block;
+    line-height: 1.6rem;
   }
 `
 
 const Nav = styled.nav`
   display: flex;
   min-width: 20vw;
-  justify-content: space-around;
+  justify-content: space-between;
 `
 
 const NavLink = styled(Link)`
+  display: flex;
+  align-items: center;
   font-size: 0.9rem;
+  transition: all 0.2s ease;
 
   :hover {
     color: ${props => props.theme.pink};
   }
 `
 const NavLinkAnchor = styled(NavLink)``
+
+const Icon = styled.div`
+  display: inline-block;
+  height: 1.6em;
+  margin-right: 1rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`
 
 /**
  * CONTAINER

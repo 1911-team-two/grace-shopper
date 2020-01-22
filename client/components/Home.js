@@ -10,7 +10,7 @@ export class Home extends React.Component {
   render() {
     return (
       <div>
-        <Header>Back in Stock</Header>
+        <Header>Featured products</Header>
         <FeaturedProducts />
         <Header>All products</Header>
         <AllProducts />
@@ -22,7 +22,11 @@ export class Home extends React.Component {
 export default Home
 
 export const Header = styled.h2`
-  font-size: 2rem;
+  font-size: 1.4rem;
+  letter-spacing: 0.1rem;
+
   color: pink;
   font-weight: 300;
+  text-transform: uppercase;
+  margin-top: 4rem;
 `
