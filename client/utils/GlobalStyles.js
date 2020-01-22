@@ -9,8 +9,6 @@ export const GlobalStyles = createGlobalStyle`
   body {
     background-color: #FEF7F5;
     font-family:'Work Sans';
-
-
     color: #39337B;
   }
 

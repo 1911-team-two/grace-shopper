@@ -93,7 +93,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   min-height: max-content;
 `
@@ -111,8 +111,9 @@ const StyledDetails = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 50px;
-  /* position: sticky;
-  top: 0; */
+  margin-top: 5vh;
+  position: sticky;
+  top: 0;
 `
 
 const h2 = styled.h2`
