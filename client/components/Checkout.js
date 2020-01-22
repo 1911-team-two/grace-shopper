@@ -93,7 +93,7 @@ export class Checkout extends React.Component {
       totalPrice += item.product.price * item.qty
     })
     totalPrice = totalPrice / 100
-
+    console.log('ORDER', this.props)
     return (
       <Wrapper onSubmit={this.handleSubmit}>
         <LeftPane>
@@ -131,11 +131,15 @@ export class Checkout extends React.Component {
           <TotalWrapper>
             <span>Total</span> <span>${totalPrice}</span>
           </TotalWrapper>
-          <input
+          {/* <SubmitWrapper> */}
+          <Button
             type="submit"
-            value="Place Order"
-            onSubmit={this.handleSubmit}
-          />
+            onClick={this.handleSubmit}
+            disabled={this.state.billing_zip === 'Zip code'}
+          >
+            Place Order
+          </Button>
+          {/* </SubmitWrapper> */}
         </RightPane>
       </Wrapper>
     )
@@ -201,4 +205,12 @@ const RightPane = styled.div`
 const TotalWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+`
+
+const Button = styled.button`
+  margin-block-start: 2em;
+  background-color: #fb80bb;
+  color: white;
+  height: 40px;
+  width: 100%;
 `
