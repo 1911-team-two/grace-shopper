@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {fetchOrders} from '../store/order'
 import Thumbnail from './Thumbnail'
 
-class UserProfile extends Component {
+export class UserProfile extends Component {
   componentDidMount() {
     this.props.getOrders()
   }
