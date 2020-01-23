@@ -73,6 +73,7 @@ export class Checkout extends React.Component {
     }
 
     const res = await axios.post('/api/orders', userInfoToBePosted)
+    console.log('res:', res)
     if (res) {
       this.setState({orderPosted: res.data})
       this.props.clearCart()

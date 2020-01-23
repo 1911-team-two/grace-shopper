@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getProducts} from '../store/products'
 import {addToCart} from '../store/cart'
+import {openModal, closeModal} from '../store/index.js'
 import styled from 'styled-components'
 
 export class SingleProduct extends React.Component {
@@ -13,6 +14,7 @@ export class SingleProduct extends React.Component {
       }
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleOpenCart = this.handleOpenCart.bind(this)
   }
 
   componentDidMount() {
@@ -27,6 +29,11 @@ export class SingleProduct extends React.Component {
     }
   }
 
+  handleOpenCart(e) {
+    this.props.openModal()
+    document.body.style.overflow = 'hidden'
+  }
+
   handleSubmit(event) {
     event.preventDefault()
     const quantity = Number(event.target.quantity.value)
@@ -37,7 +44,7 @@ export class SingleProduct extends React.Component {
   }
   render() {
     const product = this.state.product
-    console.log('PROPS', this.props)
+    console.log('STATE', this.state)
     return (
       <Wrapper>
         <StyledImg id="product-main">
@@ -57,7 +64,9 @@ export class SingleProduct extends React.Component {
             <Price>${product.price / 100}</Price>
 
             <Form onSubmit={this.handleSubmit}>
-              <Button type="submit">Add to Cart</Button>
+              <Button type="submit" onClick={this.handleOpenCart}>
+                Add to Cart
+              </Button>
               <Quantity>
                 <label htmlFor="quantity">Quantity</label>
                 <input type="number" min="1" name="quantity" defaultValue="1" />
@@ -86,14 +95,15 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
   getProducts: () => dispatch(getProducts()),
-  addToCart: (product, qty) => dispatch(addToCart({product, qty}))
+  addToCart: (product, qty) => dispatch(addToCart({product, qty})),
+  openModal: () => dispatch(openModal())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   min-height: max-content;
 `
@@ -111,8 +121,9 @@ const StyledDetails = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 50px;
-  /* position: sticky;
-  top: 0; */
+  margin-top: 5vh;
+  position: sticky;
+  top: 0;
 `
 
 const h2 = styled.h2`

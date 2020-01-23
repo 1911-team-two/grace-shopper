@@ -9,13 +9,17 @@ import {getProducts} from './store/products'
 class App extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      cartIsOpen: false
+    }
     this.props.getProducts()
   }
 
   render() {
     return (
       <Wrapper>
-        <Routes />
+        <Routes cartIsOpen={this.state.cartIsOpen} />
         <Footer />
       </Wrapper>
     )
