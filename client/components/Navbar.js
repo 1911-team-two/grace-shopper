@@ -16,6 +16,14 @@ const Navbar = ({handleClick, isLoggedIn, cart}) => {
       ''
     )
 
+  const totalCart = () => {
+    let total = 0
+    cart.forEach(item => {
+      total += item.qty
+    })
+    return total
+  }
+
   return (
     <Wrapper>
       <Link to="/">
@@ -36,7 +44,7 @@ const Navbar = ({handleClick, isLoggedIn, cart}) => {
           <Icon>
             <img src="/cart.svg" />
           </Icon>{' '}
-          Cart ({cart.length})
+          Cart ({totalCart()})
         </NavLink>
         {logOut()}
       </Nav>
