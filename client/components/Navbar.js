@@ -26,6 +26,7 @@ class Navbar extends React.Component {
     // })
 
     this.props.openModal()
+    document.body.style.overflow = 'hidden'
   }
 
   render() {

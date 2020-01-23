@@ -2,13 +2,25 @@
 import React, {Component} from 'react'
 import styled, {css} from 'styled-components'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {getCart} from '../store/cart'
+import CartItem from './CartItem'
 import {closeModal} from '../store'
 
 class CartModal extends Component {
-  // componentDidMount() {
-  //   this.props.getCart()
-  // }
+  constructor() {
+    super()
+
+    this.handleClose = this.handleClose.bind(this)
+  }
+  componentDidMount() {
+    this.props.getCart()
+  }
+
+  handleClose() {
+    this.props.closeModal()
+    document.body.style.overflow = 'initial'
+  }
 
   render() {
     console.log(this.props.isOpen)
@@ -17,27 +29,35 @@ class CartModal extends Component {
       totalPrice += item.product.price * item.qty
     })
     totalPrice = totalPrice / 100
+
+    const numOfItems = this.props.cart.length
+    console.log('numOfItems:', numOfItems)
     return (
       <Wrapper isOpen={this.props.isOpen}>
         <Drawer isOpen={this.props.isOpen}>
-          <button onClick={this.props.closeModal}>X</button>
-          <h3>Cart</h3>
-          <span>View full</span>
+          <TopBar>
+            <div>
+              <CloseButton onClick={this.handleClose}>+</CloseButton>
+              <Title>Cart ({numOfItems})</Title>
+            </div>
+            <FullLink onClick={this.handleClose} to="/cart">
+              View full
+            </FullLink>
+          </TopBar>
           <div>
             {this.props.cart.map((item, i) => {
-              return (
-                <CartItem key={i}>
-                  <Thumbnail src={item.product.imageUrl[1]} />
-                  <div>
-                    <p>{item.product.name}</p>
-                    <p>${item.product.price / 100}</p>
-                  </div>
-                </CartItem>
-              )
+              console.log('item:', item)
+              return <Item item={item} />
             })}
           </div>
-          <p>Subtotal {totalPrice}</p>
-          <button>Checkout</button>
+
+          <Subtotal>
+            <p>Subtotal </p>
+            <p>${totalPrice}</p>
+          </Subtotal>
+          <Link to="/checkout">
+            <CheckoutButton>Checkout</CheckoutButton>
+          </Link>
         </Drawer>
       </Wrapper>
     )
@@ -56,36 +76,127 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartModal)
 const Wrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.6);
-  z-index: 1001;
-  opacity: ${props => (props.isOpen ? '1' : '0')};
-  /* transition: opacity 0.3s; */
   color: black;
+
+  .divider {
+    background-color: black;
+    height: 1px;
+    width: 80%;
+    margin: 4vh 0 3vh 0;
+  }
 `
 
 const Drawer = styled.div`
+  width: 30vw;
+  min-height: 100vh;
+  z-index: 20000;
+  background-color: #f2dad4;
   position: absolute;
   top: 0;
-  right:0;
-  /* right: ${props => (props.isOpen ? '0' : '-100%')}; */
-  /* display: ${props => (props.isOpen ? 'block' : 'none')}; */
-  transition: right 0.3s ease;
-  background-color: #f2dad4;
-  min-width: 30vw;
-  height: 100vh;
-  padding: 5%;
+  right: ${props => (props.isOpen ? '0%' : '-100%')};
+  transition: right 0.25s ease-in-out;
+  padding-left: 40px;
+  padding-top: 6vh;
+  padding-right: 30px;
+`
+
+const Title = styled.h3`
+  font-size: 35px;
+  font-weight: 400;
+  margin: 0 0 6px 0;
+`
+
+const FullLink = styled(Link)`
+  font-size: 11px;
+  text-decoration: underline;
+  margin-left: 2px;
+  display: block;
 `
 
 const Thumbnail = styled.img`
   height: 200px;
   width: auto;
-  margin-right: 15px;
+  margin-right: 25px;
 `
-const CartItem = styled.div`
+// const CartItem = styled.div`
+//   display: flex;
+//   align-items: flex-end;
+//   margin-bottom: 30px;
+//   font-weight: 200;
+
+//   .name {
+//     font-size: 22px;
+//     margin: 0;
+//     font-weight: 200;
+//   }
+
+//   .price {
+//     font-size: 22px;
+//     margin: 0;
+//     padding-bottom: 15px;
+//   }
+// `
+
+const Item = styled(CartItem)`
+  padding-right: 30px;
+`
+
+const CloseButton = styled.button`
+  display: inline-block;
+  border: none;
+  padding: 10px 10px;
+  padding-left: 0;
+  margin: 0;
+  text-decoration: none;
+  background: none;
+  color: black;
+  font-size: 50px;
+  font-weight: 200;
+  cursor: pointer;
+  text-align: center;
+  transform: rotate(45deg);
+  margin-right: 5px;
+`
+
+const Subtotal = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 400;
+`
+const TopBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 40px;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+`
+
+const CheckoutButton = styled.button`
+  display: inline-block;
+  border: none;
+  padding: 10px 10px;
+  padding-left: 0;
+  margin: 0;
+  text-decoration: none;
+  background: none;
+  color: white;
+  width: 100%;
+  font-size: 30px;
+  background: black;
+  font-weight: 100;
+  height: 70px;
+  cursor: pointer;
+  text-align: center;
+  margin-right: 5px;
+  border-radius: 5px;
+
+  :hover {
+    background-color: #2c2c2c;
+  }
 `
