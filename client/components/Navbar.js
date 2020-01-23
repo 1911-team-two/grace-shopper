@@ -133,9 +133,6 @@ const Icon = styled.div`
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-
-    cart: state.cart
-
     cart: state.cart,
     isOpen: state.isOpen
 
