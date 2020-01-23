@@ -5,6 +5,7 @@ import Thumbnail from './Thumbnail'
 
 export class AllProducts extends React.Component {
   render() {
+    console.log(this.props.allProducts)
     return (
       <Wrapper className="allProducts">
         {this.props.allProducts.map(product => {
@@ -24,6 +25,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  ${'' /* width: 80%; */}
 `
 
 export default connect(mapStateToProps)(AllProducts)

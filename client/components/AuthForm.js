@@ -12,7 +12,9 @@ const AuthForm = props => {
 
   return (
     <Wrapper>
-      {error && error.response && <Alert>{error.response.data} </Alert>}
+      {error && error.response && name === 'login' && (
+        <Alert>{error.response.data} </Alert>
+      )}
 
       <form onSubmit={handleSubmit} name={name}>
         <label htmlFor="email">
