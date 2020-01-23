@@ -68,7 +68,6 @@ export class Checkout extends React.Component {
   async handleSubmit(e) {
     e.preventDefault()
     let userInfoToBePosted = {
-      id: this.props.userId,
       cart: this.props.cart
     }
 

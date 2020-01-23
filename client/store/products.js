@@ -24,7 +24,7 @@ export const getProducts = () => {
     try {
       const {data} = await axios.get('/api/products')
 
-      dispatch(gotProducts(data))
+      dispatch(gotProducts(data.slice()))
     } catch (err) {
       dispatch(failedToGetProducts(err))
     }
@@ -36,6 +36,7 @@ export const getProducts = () => {
 export default function(state = initAllProducts, action) {
   switch (action.type) {
     case GOT_PRODUCTS:
+      console.log(action)
       return action.products
     case FAILED_TO_GET_PRODUCTS:
       return action.error

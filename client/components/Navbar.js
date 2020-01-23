@@ -10,10 +10,18 @@ import CartModal from './CartModal'
 class Navbar extends React.Component {
   constructor() {
     super()
-
     this.handleOpenCart = this.handleOpenCart.bind(this)
   }
 
+  totalCart() {
+    let total = 0
+    this.props.cart.forEach(item => {
+      total += item.qty
+    })
+    return total
+  }
+
+  
   handleOpenCart(e) {
     // if (this.props.isOpen === true) {
     //   document.body.style.overflow = 'hidden'

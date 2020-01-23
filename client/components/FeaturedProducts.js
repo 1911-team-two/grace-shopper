@@ -8,9 +8,10 @@ export class FeaturedProducts extends React.Component {
   render() {
     return (
       <Wrapper className="featuredProducts">
-        {this.props.allProducts.splice(0, 4).map(product => {
+        {this.props.allProducts.slice(0, 4).map(product => {
           return <Thumbnail featured product={product} key={product.id} />
         })}
+        <Spacer />
       </Wrapper>
     )
   }
@@ -26,6 +27,10 @@ const Wrapper = styled.div`
   display: flex;
   overflow-x: scroll;
   margin: 0 -4vw;
-  padding-bottom: 2rem;
-  padding-left: 4vw;
+  padding: 0 4vw 2rem 4vw;
+  box-sizing: border-box;
+`
+const Spacer = styled.div`
+  content: '';
+  flex: 0 0 4vw;
 `

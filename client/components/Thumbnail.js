@@ -20,7 +20,7 @@ export default Thumbnail
 
 const Wrapper = styled.div`
   ${props =>
-    props.featured ? 'flex: 1 0 29%;' : 'flex: 0 0 calc(25% - .4rem);'}
+    props.featured ? 'flex: 1 0 29%;' : 'flex: 0 0 calc(25% - 2rem);'}
   ${props =>
     props.featured ? 'margin-right: 0.8rem;' : ''}
   margin-bottom: 1rem;
