@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getProducts} from '../store/products'
 import {addToCart} from '../store/cart'
+import {openModal, closeModal} from '../store/index.js'
 import styled from 'styled-components'
 
 export class SingleProduct extends React.Component {
@@ -13,6 +14,7 @@ export class SingleProduct extends React.Component {
       }
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleOpenCart = this.handleOpenCart.bind(this)
   }
 
   componentDidMount() {
@@ -25,6 +27,11 @@ export class SingleProduct extends React.Component {
         product: this.props.product
       })
     }
+  }
+
+  handleOpenCart(e) {
+    this.props.openModal()
+    document.body.style.overflow = 'hidden'
   }
 
   handleSubmit(event) {
@@ -57,7 +64,9 @@ export class SingleProduct extends React.Component {
             <Price>${product.price / 100}</Price>
 
             <Form onSubmit={this.handleSubmit}>
-              <Button type="submit">Add to Cart</Button>
+              <Button type="submit" onClick={this.handleOpenCart}>
+                Add to Cart
+              </Button>
               <Quantity>
                 <label htmlFor="quantity">Quantity</label>
                 <input type="number" min="1" name="quantity" defaultValue="1" />
@@ -86,7 +95,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
   getProducts: () => dispatch(getProducts()),
-  addToCart: (product, qty) => dispatch(addToCart({product, qty}))
+  addToCart: (product, qty) => dispatch(addToCart({product, qty})),
+  openModal: () => dispatch(openModal())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)

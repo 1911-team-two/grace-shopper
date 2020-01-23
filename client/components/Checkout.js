@@ -143,6 +143,8 @@ export class Checkout extends React.Component {
          
 
             onClick={this.handleSubmit}
+
+
             disabled={this.state.billing_zip === 'Zip code'}
           >
             Place Order
