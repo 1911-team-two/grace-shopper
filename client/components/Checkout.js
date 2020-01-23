@@ -72,6 +72,7 @@ export class Checkout extends React.Component {
     }
 
     const res = await axios.post('/api/orders', userInfoToBePosted)
+    console.log('res:', res)
     if (res) {
       this.setState({orderPosted: res.data})
       this.props.clearCart()
@@ -135,12 +136,20 @@ export class Checkout extends React.Component {
           {/* <SubmitWrapper> */}
           <Button
             type="submit"
+
+            value="Place Order"
             onClick={this.handleSubmit}
+         
+
+            onClick={this.handleSubmit}
+
+
             disabled={this.state.billing_zip === 'Zip code'}
           >
             Place Order
           </Button>
           {/* </SubmitWrapper> */}
+
         </RightPane>
       </Wrapper>
     )
