@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
+import {openModal, closeModal} from '../store/index.js'
 import {logout} from '../store'
 import CartModal from './CartModal'
 
@@ -10,23 +11,21 @@ class Navbar extends React.Component {
   constructor() {
     super()
 
-    this.state = {
-      cartOpen: false
-    }
-
     this.handleOpenCart = this.handleOpenCart.bind(this)
   }
 
   handleOpenCart(e) {
-    if (this.state.cartOpen === false) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'initial'
-    }
+    // if (this.props.isOpen === true) {
+    //   document.body.style.overflow = 'hidden'
+    // } else {
+    //   document.body.style.overflow = 'initial'
+    // }
 
-    this.setState({
-      cartOpen: !this.state.cartOpen
-    })
+    // this.setState({
+    //   cartOpen: !this.state.cartOpen
+    // })
+
+    this.props.openModal()
   }
 
   render() {
@@ -39,10 +38,7 @@ class Navbar extends React.Component {
           </Logo>
         </Link>
 
-        <CartModal
-          handleOpenCart={this.handleOpenCart}
-          isOpen={this.state.cartOpen}
-        />
+        <CartModal handleOpenCart={this.handleOpenCart} />
 
         {/* <Link to="/">Home</Link> */}
         {this.props.isLoggedIn ? (
@@ -113,7 +109,6 @@ const NavLink = styled(Link)`
 `
 const NavLinkAnchor = styled(NavLink)``
 
-const NavButton = styled.button``
 const Icon = styled.div`
   display: inline-block;
   height: 1.6em;
@@ -131,7 +126,8 @@ const Icon = styled.div`
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    cart: state.cart
+    cart: state.cart,
+    isOpen: state.isOpen
   }
 }
 
@@ -139,6 +135,14 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+    },
+
+    openModal() {
+      dispatch(openModal())
+    },
+
+    closeModal() {
+      dispatch(closeModal())
     }
   }
 }
