@@ -137,12 +137,20 @@ export class Checkout extends React.Component {
           {/* <SubmitWrapper> */}
           <Button
             type="submit"
+
+            value="Place Order"
             onClick={this.handleSubmit}
+         
+
+            onClick={this.handleSubmit}
+
+
             disabled={this.state.billing_zip === 'Zip code'}
           >
             Place Order
           </Button>
           {/* </SubmitWrapper> */}
+
         </RightPane>
       </Wrapper>
     )
