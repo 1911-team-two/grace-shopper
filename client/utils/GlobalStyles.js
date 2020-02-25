@@ -10,6 +10,7 @@ export const GlobalStyles = createGlobalStyle`
     background-color: #FEF7F5;
     font-family:'Work Sans';
     color: #39337B;
+    overflow-x: hidden;
   }
 
   a, a:visited {
